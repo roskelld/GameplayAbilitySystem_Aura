@@ -2,20 +2,30 @@
 
 
 #include "Character/AuraEnemy.h"
+#include "Aura/Aura.h"
 #include "Engine/Engine.h"
 #include "Kismet/KismetSystemLibrary.h"
 
+AAuraEnemy::AAuraEnemy()
+{
+	// Configure so it blocks cursor 
+	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+}
+
 void AAuraEnemy::HighlightActor()
 {
-	bHighlighted = true;
-	FString ActorDisplayName = GetOwner()->GetName();
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(100, 999.f, FColor::Blue, FString::Printf(TEXT("%s"), *ActorDisplayName));
+	GetMesh()->SetRenderCustomDepth(true);
+	GetMesh()->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
+
+	Weapon->SetRenderCustomDepth(true);
+	Weapon->SetCustomDepthStencilValue(CUSTOM_DEPTH_RED);
 }
 
 void AAuraEnemy::UnHighlightActor()
 {
-	bHighlighted = false;
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(100, 999.f, FColor::Blue, TEXT(""));
+	GetMesh()->SetRenderCustomDepth(false);
+	GetMesh()->SetCustomDepthStencilValue(0);
+
+	Weapon->SetRenderCustomDepth(false);
+	Weapon->SetCustomDepthStencilValue(0);
 }
