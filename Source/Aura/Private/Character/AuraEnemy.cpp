@@ -2,14 +2,19 @@
 
 
 #include "Character/AuraEnemy.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include <AbilitySystem/AuraAttributeSet.h>
 #include "Aura/Aura.h"
-#include "Engine/Engine.h"
-#include "Kismet/KismetSystemLibrary.h"
 
 AAuraEnemy::AAuraEnemy()
 {
 	// Configure so it blocks cursor 
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+
+	AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+
+	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet");
 }
 
 void AAuraEnemy::HighlightActor()
