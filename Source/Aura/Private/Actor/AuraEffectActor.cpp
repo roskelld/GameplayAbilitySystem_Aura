@@ -1,10 +1,11 @@
 // Copyright Iron Goblin Corp. 2023
 
+#include "Actor/AuraEffectActor.h"
 #include "Components/SphereComponent.h"
 #include "AbilitySystemInterface.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 //#include "Components/StaticMeshComponent.h"
-#include "Actor/AuraEffectActor.h"
+
 
 AAuraEffectActor::AAuraEffectActor()
 {
