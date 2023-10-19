@@ -12,7 +12,8 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetCont
 
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
 
-		return OverlayWidgetController;
+		// Bind to the attribute changes 
+		OverlayWidgetController->BindCallbacksToDependencies();
 	} 
 	return OverlayWidgetController;
 }
@@ -35,6 +36,9 @@ void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 
 	// Set the controller on the overlay widget
 	OverlayWidget->SetWidgetController(WidgetController);
+
+	// Broadcast initial attribute values
+	WidgetController->BroadcastInitialValues();
 
 	Widget->AddToViewport();
 }
