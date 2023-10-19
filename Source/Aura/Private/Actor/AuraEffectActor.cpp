@@ -44,7 +44,7 @@ void AAuraEffectActor::ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGam
 	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.0f, EffectContextHandle);
 
 	// EffectSpecHandle wrapper has the Data for the spec as a pointer
-	// Using Get pulls in the data, and adding * dereferences it to the 
-	// data so it can be given as a const ref.  
+	// wrapper Using Get pulls in the data, and adding * dereferences 
+	// it to the data so it can be given as a const ref.  
 	TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
 }
