@@ -2,7 +2,6 @@
 
 
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
-//#include "Engine/Engine.h"
 
 void UAuraAbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -16,6 +15,4 @@ void UAuraAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* Ability
 	EffectSpec.GetAllAssetTags(TagContainer);
 
 	EffectAssetTags.Broadcast(TagContainer);
-
-
 }
