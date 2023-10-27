@@ -12,19 +12,19 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Primary_Intelligence, "Attributes.
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Primary_Resilience, "Attributes.Primary.Resilience", "Armor and Armor Penetration");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Primary_Vigor, "Attributes.Primary.Vigor", "Increase health");
 
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Vital_Health, "Attributes.Vital.Health", "Health");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Vital_Mana, "Attributes.Vital.Mana", "Magic");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Vital_Health, "Attributes.Vital.Health", "Current Health");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Vital_Mana, "Attributes.Vital.Mana", "Current Magic");
 
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_Armor, "Attributes.Secondary.Armor", "Reduces damage taken, improves Block Chance");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ArmorPenetration, "Attributes.Secondary.ArmorPenetration", "");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_BlockChance, "Attributes.Secondary.BlockChance", "");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CriticalHitChance, "Attributes.Secondary.CriticalHitChance", "");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CritialHitDamage, "Attributes.Secondary.CritialHitDamage", "");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CritialHitResistance, "Attributes.Secondary.CritialHitResistance", "");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_HealthRegeneration, "Attributes.Secondary.HealthRegeneration", "");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ManaRegeneration, "Attributes.Secondary.ManaRegeneration", "");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxHealth, "Attributes.Secondary.MaxHealth", "");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxMana, "Attributes.Secondary.MaxMana", "");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ArmorPenetration, "Attributes.Secondary.ArmorPenetration", "Ignores Percentage of enemy Armor, increase Critical Hit Chance");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_BlockChance, "Attributes.Secondary.BlockChance", "Chance to cut incoming damage in half");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CriticalHitChance, "Attributes.Secondary.CriticalHitChance", "Chance to double damage, and critical hit bonus");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CritialHitDamage, "Attributes.Secondary.CritialHitDamage", "Bonus damage added when a critical hit is scored");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CritialHitResistance, "Attributes.Secondary.CritialHitResistance", "Reduces Critical Hit Chance of attacking enemies");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_HealthRegeneration, "Attributes.Secondary.HealthRegeneration", "Amount of Health regenerated every second");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ManaRegeneration, "Attributes.Secondary.ManaRegeneration", "Amount of Mana regenerated every second");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxHealth, "Attributes.Secondary.MaxHealth", "Maximum amount of Health obtainable");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxMana, "Attributes.Secondary.MaxMana", "Maximum amount of Mana obtainable");
 
 void FAuraGameplayTags::InitializeNativeGameplayTags()
 {
