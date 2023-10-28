@@ -79,7 +79,12 @@ public:
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
-	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
+	// Old version from lesson 94
+	//TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
+
+	// Much simpler version that just points straight to the GameplayAttribute
+	// and doesn't touch the static function ptr stuff. 
+	TMap<FGameplayTag, FGameplayAttribute> TagsToAttributes;
 
 	/*
 	* Primary Attributes

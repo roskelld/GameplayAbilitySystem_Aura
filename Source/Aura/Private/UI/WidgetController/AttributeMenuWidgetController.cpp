@@ -20,7 +20,7 @@ void UAttributeMenuWidgetController::BroadcastInitialValues()
 	for (auto& Pair : AS->TagsToAttributes)
 	{
 		FAuraAttributeInfo Info = AttributeInfo->FindAttributeInfoForTag(Pair.Key);
-		Info.AttributeValue = Pair.Value().GetNumericValue(AS);
+		Info.AttributeValue = Pair.Value.GetNumericValue(AS);
 		AttributeInfoDelegate.Broadcast(Info);
 	}
 }
