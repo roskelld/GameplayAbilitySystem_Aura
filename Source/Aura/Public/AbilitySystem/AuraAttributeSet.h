@@ -51,6 +51,18 @@ struct FEffectProperties
 	ACharacter* TargetCharacter = nullptr;
 };
 
+
+/**
+ * Static Function Pointer
+ * The code below is used in the TMap to bind a gameplay tag to a gameplay attribute function call 
+ * We use a C++ template to make the code more readable in the TMap
+ */
+
+// typedef is specific to the FGameplayAttribute() signature, but TStaticFunPtr is generic to any signature chosen.
+// typedef TBaseStaticDelegateInstance<FGameplayAttribute(), FDefaultDelegateUserPolicy>::FFuncPtr FAttributeFuncPtr;
+template<class T>
+using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
+
 /**
  * 
  */
@@ -66,6 +78,8 @@ public:
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
+
+	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
 
 	/*
 	* Primary Attributes
