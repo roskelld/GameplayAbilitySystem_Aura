@@ -11,6 +11,7 @@
 class UAbilitySystemComponent;
 class UAttributeSet;
 class UGameplayEffect;
+class UGameplayAbility;
 
 // Abstract prevents class from being instantiated in editor
 UCLASS(Abstract)
@@ -51,4 +52,15 @@ protected:
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 
 	void InitializeDefaultAttributes() const;
+
+	// Adds abilities stored in StartupAbilities array
+	// called through the ASC AddCharacterAbilities function
+	void AddCharacterAbilities();
+
+private:
+
+	// Storage point on character to list abilities they should
+	// start with
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 };
