@@ -19,6 +19,7 @@ public:
 	void BindAbilityActions(const UAuraInputConfig* InputConfig, UserClass* Object, PressedFuncType PressedFunc, ReleasedFuncType ReleasedFunc, HeldFuncType HeldFunc);
 };
 
+/* Mapping for adding controls to abilities with gameplay tags */
 template<class UserClass, typename PressedFuncType, typename ReleasedFuncType, typename HeldFuncType>
 inline void UAuraInputComponent::BindAbilityActions(const UAuraInputConfig* InputConfig, UserClass* Object, PressedFuncType PressedFunc, ReleasedFuncType ReleasedFunc, HeldFuncType HeldFunc)
 {
