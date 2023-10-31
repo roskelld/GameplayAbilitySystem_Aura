@@ -26,6 +26,14 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ManaRegeneration, "Attri
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxHealth, "Attributes.Secondary.MaxHealth", "Maximum amount of Health obtainable");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxMana, "Attributes.Secondary.MaxMana", "Maximum amount of Mana obtainable");
 
+/* Controller Input Tags */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_LMB, "InputTag.LMB", "Input Tag for Left Mouse Button");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_RMB, "InputTag.RMB", "Input Tag for Right Mouse Button");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_1, "InputTag.1", "Input Tag for 1 Key");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_2, "InputTag.2", "Input Tag for 2 Key");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_3, "InputTag.3", "Input Tag for 3 Key");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_4, "InputTag.4", "Input Tag for 4 Key");
+
 void FAuraGameplayTags::InitializeNativeGameplayTags()
 {
 	GameplayTags.Attributes_Primary_Strength = TAG_Attributes_Primary_Strength;
@@ -44,4 +52,12 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Attributes_Secondary_ManaRegeneration = TAG_Attributes_Secondary_ManaRegeneration;
 	GameplayTags.Attributes_Secondary_MaxHealth = TAG_Attributes_Secondary_MaxHealth;
 	GameplayTags.Attributes_Secondary_MaxMana = TAG_Attributes_Secondary_MaxMana;
+
+	/* Controller Input Tags */
+	GameplayTags.InputTag_LMB = TAG_InputTag_LMB;
+	GameplayTags.InputTag_RMB = TAG_InputTag_RMB;
+	GameplayTags.InputTag_1 = TAG_InputTag_1;
+	GameplayTags.InputTag_2 = TAG_InputTag_2;
+	GameplayTags.InputTag_3 = TAG_InputTag_3;
+	GameplayTags.InputTag_4 = TAG_InputTag_4;
 }
