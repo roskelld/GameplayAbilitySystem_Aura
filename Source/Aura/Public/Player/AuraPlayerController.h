@@ -14,7 +14,7 @@ struct FInputActionValue;
 class IEnemyInterface;
 class UAuraInputConfig;
 class UAuraAbilitySystemComponent;
-
+class USplineComponent;
 /**
  * 
  */
@@ -56,4 +56,18 @@ private:
 	TObjectPtr< UAuraAbilitySystemComponent> AuraAbilitySystemComponent;
 
 	UAuraAbilitySystemComponent* GetASC();
+
+	// Movement
+	FVector CachedDestination = FVector::ZeroVector;
+	float FollowTime = 0.f;
+	float ShortPressThreashold = 0.5f;
+	bool bAutoRunning = false;
+	bool bTargetting = false;
+
+	UPROPERTY(EditDefaultsOnly)
+	float AutoRunAcceptanceRadius = 50.f;
+
+	/* Spline player character will follow on a click to move action */
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USplineComponent> Spline;
 };
