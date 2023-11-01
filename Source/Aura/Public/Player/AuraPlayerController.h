@@ -70,4 +70,6 @@ private:
 	/* Spline player character will follow on a click to move action */
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USplineComponent> Spline;
+
+	void AutoRun();
 };
