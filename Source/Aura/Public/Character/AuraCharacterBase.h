@@ -30,6 +30,12 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
+	/* The point where abilities are fired from */
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	FName WeaponTipSocket;
+
+	virtual FVector GetCombatSocketLocation() override;
+
 	// Populated by AuraEnemy character for AI and via
 	// AuraPlayerState for players
 	UPROPERTY()
