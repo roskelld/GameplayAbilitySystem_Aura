@@ -34,6 +34,7 @@ protected:
 	 The useful concept here is that these tags are not applied to the character, but stay on the GE, *and*
 	 they work on instant effects too, sending the tag out before removing it. So great for flash events. 
 	*/
-	void EffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
+	UFUNCTION(Client, Reliable)
+	void ClientEffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
 
 };
