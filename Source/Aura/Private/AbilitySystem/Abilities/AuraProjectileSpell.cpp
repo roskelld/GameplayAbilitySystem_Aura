@@ -8,9 +8,13 @@
 void UAuraProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
+}
 
+
+void UAuraProjectileSpell::SpawnProjectile()
+{
 	// Check that we have authority over this ability 
-	const bool bIsServer = HasAuthority(&ActivationInfo);
+	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 
 	// Exit if we are not the server
 	if (!bIsServer) return;
@@ -22,14 +26,12 @@ void UAuraProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Hand
 		const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
 		//TODO: Set projectile rotation
 
-		FTransform SpawnTransform;
+		 FTransform SpawnTransform;
 		SpawnTransform.SetLocation(SocketLocation);
 
 		// Prepare projectile actor ready for spawn
 		AAuraProjectile* Projectile = GetWorld()->SpawnActorDeferred<AAuraProjectile>(ProjectileClass, SpawnTransform, GetOwningActorFromActorInfo(), Cast<APawn>(GetOwningActorFromActorInfo()), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 
-
-		//TODO: Give the projectile a Gameplay Effect Spec for causing damage;
 		Projectile->FinishSpawning(SpawnTransform);
 	}
 }
