@@ -5,8 +5,10 @@
 #include "CoreMinimal.h"
 #include "Interaction/EnemyInterface.h"
 #include "Character/AuraCharacterBase.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 #include "AuraEnemy.generated.h"
 
+class UWidgetComponent;
 /**
  * 
  */
@@ -27,6 +29,14 @@ public:
 	virtual int32 GetPlayerLevel() override;
 	//~ end Combat Interface.
 
+	/* Using the delegate from OverlayWidgetController to broadcast health changes to UI health bar widget */
+	/* This could be derived into its own class and included in both OverlayWidgetController and this also */
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedSignature OnHealthChanged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedSignature OnMaxHealthChanged;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -34,4 +44,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadonly, Category = "Character Class Defaults")
 	int32 Level = 1;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadonly)
+	TObjectPtr<UWidgetComponent> HealthBar;
 };
