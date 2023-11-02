@@ -3,6 +3,7 @@
 
 #include "AuraAssetManager.h"
 #include "AuraGameplayTags.h"
+#include "AbilitySystemGlobals.h"
 
 UAuraAssetManager& UAuraAssetManager::Get()
 {
@@ -18,4 +19,9 @@ void UAuraAssetManager::StartInitialLoading()
 	Super::StartInitialLoading();
 
 	FAuraGameplayTags::InitializeNativeGameplayTags();
+
+	// Required for Target Data (for projectiles)
+	// clients will yolo into their own instance if not.
+	// Can be removed in UE 5.3 as it's not needed
+	UAbilitySystemGlobals::Get().InitGlobalData();
 }
