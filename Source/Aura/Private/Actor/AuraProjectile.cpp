@@ -6,6 +6,8 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/AudioComponent.h"
+#include <AbilitySystemBlueprintLibrary.h>
+#include "AbilitySystemComponent.h"
 #include "NiagaraFunctionLibrary.h"
 
 AAuraProjectile::AAuraProjectile()
@@ -56,6 +58,13 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 
 	if (HasAuthority())
 	{
+		// Get the ASC of the actor we hit
+		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
+		{
+			// Get the hit actor to apply the gameplay effect to self by generating one from the handle
+			TargetASC->ApplyGameplayEffectSpecToSelf(*DamageEffectSpecHandle.Data.Get());
+		}
+		
 		Destroy();
 	}
 	else 

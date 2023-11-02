@@ -13,8 +13,6 @@ AAuraCharacterBase::AAuraCharacterBase()
 	PrimaryActorTick.bCanEverTick = false;
 
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
-	//Let the character mesh generate overlap events, not the capsule
-	GetCapsuleComponent()->SetGenerateOverlapEvents(false);
 	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
 	GetMesh()->SetGenerateOverlapEvents(true);
