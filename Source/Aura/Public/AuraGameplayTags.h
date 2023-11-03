@@ -65,6 +65,9 @@ public:
 	FGameplayTag InputTag_3;
 	FGameplayTag InputTag_4;
 
+	// Set By Caller Tags
+	FGameplayTag Damage;
+
 protected:
 
 private:

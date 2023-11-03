@@ -34,6 +34,9 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_2, "InputTag.2", "Input Tag for 2 Ke
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_3, "InputTag.3", "Input Tag for 3 Key");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_4, "InputTag.4", "Input Tag for 4 Key");
 
+/* Set By Caller Tags */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage, "Damage", "Damage tag used by Set by Caller");
+
 void FAuraGameplayTags::InitializeNativeGameplayTags()
 {
 	GameplayTags.Attributes_Primary_Strength = TAG_Attributes_Primary_Strength;
@@ -60,4 +63,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.InputTag_2 = TAG_InputTag_2;
 	GameplayTags.InputTag_3 = TAG_InputTag_3;
 	GameplayTags.InputTag_4 = TAG_InputTag_4;
+
+	/* Set By Caller Tags */
+	GameplayTags.Damage = TAG_Damage;
 }
