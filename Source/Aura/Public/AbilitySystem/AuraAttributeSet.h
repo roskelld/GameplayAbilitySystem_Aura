@@ -163,8 +163,18 @@ public:
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxMana);
 
 	/*
+	* Meta Attributes (Not Replicated as they are used by the server to calculate updates before broadcasting the results)
+	*/
+
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
+
+	/*
 	* End Attributes
 	*/
+
+
 
 	// Vital OnRep Functions
 
