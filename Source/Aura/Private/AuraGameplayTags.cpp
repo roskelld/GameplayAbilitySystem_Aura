@@ -36,6 +36,7 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_4, "InputTag.4", "Input Tag for 4 Ke
 
 /* Set By Caller Tags */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage, "Damage", "Damage tag used by Set by Caller");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Effects_HitReact, "Effects.HitReact", "Applied to characters are hit reacting");
 
 void FAuraGameplayTags::InitializeNativeGameplayTags()
 {
@@ -66,4 +67,6 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 
 	/* Set By Caller Tags */
 	GameplayTags.Damage = TAG_Damage;
+
+	GameplayTags.Effects_HitReact = TAG_Effects_HitReact;
 }

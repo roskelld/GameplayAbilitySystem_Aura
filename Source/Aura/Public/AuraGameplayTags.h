@@ -68,6 +68,8 @@ public:
 	// Set By Caller Tags
 	FGameplayTag Damage;
 
+	FGameplayTag Effects_HitReact;
+
 protected:
 
 private:
