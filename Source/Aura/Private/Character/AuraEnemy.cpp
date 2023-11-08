@@ -112,4 +112,12 @@ int32 AAuraEnemy::GetPlayerLevel()
 	return Level;
 }
 
+void AAuraEnemy::Die()
+{
+	// Destroy character after lifespan expires
+	SetLifeSpan(LifeSpan);
+
+	Super::Die();
+}
+
 

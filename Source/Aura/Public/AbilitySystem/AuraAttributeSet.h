@@ -15,7 +15,17 @@
 	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
-
+/* Struct used by UAuraAttributeSet::SetEffectProperties() to provide easy access to effect data elements:
+* EffectContextHandle
+* SourceASC
+* SourceAvatarActor
+* SourceController
+* SourceCharacter
+* TargetASC
+* TargetAvatarActor
+* TargetController
+* TargetCharacter
+*/
 USTRUCT()
 struct FEffectProperties
 {
