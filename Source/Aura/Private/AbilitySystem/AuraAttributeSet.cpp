@@ -8,6 +8,8 @@
 #include "Engine/Engine.h"
 #include "AuraGameplayTags.h"
 #include <Interaction/CombatInterface.h>
+#include <Kismet/GameplayStatics.h>
+#include <Player/AuraPlayerController.h>
 
 UAuraAttributeSet::UAuraAttributeSet()
 {
@@ -123,6 +125,20 @@ void UAuraAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData
 	}
 }
 
+void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage) const
+{
+	// Only show damage if it wasn't self inflicted
+	if (Props.SourceCharacter != Props.TargetCharacter)
+	{
+		// Get Player Controller of damage source character
+		if (AAuraPlayerController* PC = Cast<AAuraPlayerController>(UGameplayStatics::GetPlayerController(Props.SourceCharacter, 0)))
+		{
+			// Show damage over damage target character
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter);
+		}
+	}
+}
+
 void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
@@ -173,6 +189,8 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 				TagContainer.AddTag(FAuraGameplayTags::Get().Effects_HitReact);
 				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
+
+			ShowFloatingText(Props, LocalIncomingDamage);
 		}
 	}
 }
