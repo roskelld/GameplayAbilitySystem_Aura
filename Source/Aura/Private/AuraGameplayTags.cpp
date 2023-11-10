@@ -26,6 +26,11 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ManaRegeneration, "Attri
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxHealth, "Attributes.Secondary.MaxHealth", "Maximum amount of Health obtainable");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxMana, "Attributes.Secondary.MaxMana", "Maximum amount of Mana obtainable");
 
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Fire, "Attributes.Resistance.Fire", "Resistance to Fire Damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Lightning, "Attributes.Resistance.Lightning", "Resistance to Lightning Damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Arcane, "Attributes.Resistance.Arcane", "Resistance to Arcane Damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Physical, "Attributes.Resistance.Physical", "Resistance to Physical Damage");
+
 /* Controller Input Tags */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_LMB, "InputTag.LMB", "Input Tag for Left Mouse Button");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_RMB, "InputTag.RMB", "Input Tag for Right Mouse Button");
@@ -36,7 +41,12 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_4, "InputTag.4", "Input Tag for 4 Ke
 
 /* Set By Caller Tags */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage, "Damage", "Damage tag used by Set by Caller");
+
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage_Fire, "Damage.Fire", "Fire Damage Type");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage_Lightning, "Damage.Lightning", "Lightning Damage Type");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage_Arcane, "Damage.Arcane", "Arcane Damage Type");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage_Physical, "Damage.Physical", "Physical Damage Type");
+
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Effects_HitReact, "Effects.HitReact", "Applied to characters are hit reacting");
 
 void FAuraGameplayTags::InitializeNativeGameplayTags()
@@ -68,10 +78,33 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 
 	/* Set By Caller Tags */
 	GameplayTags.Damage = TAG_Damage;
+
+	/* 
+	 *	Damage Types
+	 */
 	GameplayTags.Damage_Fire = TAG_Damage_Fire;
+	GameplayTags.Damage_Lightning = TAG_Damage_Lightning;
+	GameplayTags.Damage_Arcane = TAG_Damage_Arcane;
+	GameplayTags.Damage_Physical = TAG_Damage_Physical;
 
-	// Array of all damage types
-	GameplayTags.DamageTypes.Add(GameplayTags.Damage_Fire);
+	/*
+	 *	Resistances
+	 */
+	GameplayTags.Attributes_Resistance_Fire = TAG_Attributes_Resistance_Fire;
+	GameplayTags.Attributes_Resistance_Lightning = TAG_Attributes_Resistance_Lightning;
+	GameplayTags.Attributes_Resistance_Arcane = TAG_Attributes_Resistance_Arcane;
+	GameplayTags.Attributes_Resistance_Physical = TAG_Attributes_Resistance_Physical;
 
+	/*
+	 *	Map of Damage Types to Resistances
+	 */
+	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Fire, GameplayTags.Attributes_Resistance_Fire);
+	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Lightning, GameplayTags.Attributes_Resistance_Lightning);
+	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Arcane, GameplayTags.Attributes_Resistance_Arcane);
+	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Physical, GameplayTags.Attributes_Resistance_Physical);
+
+	/*
+	 *	Effects
+	 */
 	GameplayTags.Effects_HitReact = TAG_Effects_HitReact;
 }
