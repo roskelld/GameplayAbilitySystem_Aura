@@ -60,10 +60,11 @@ void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 		// Set by Caller Damage Amount
 		const FAuraGameplayTags GameplayTags = FAuraGameplayTags::Get();
 
-		// const float ScaledDamage = Damage.GetValueAtLevel(GetAbilityLevel());
-		const float ScaledDamage = Damage.GetValueAtLevel(10.f);
-		
-		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, GameplayTags.Damage, ScaledDamage);
+		for (auto& Pair : DamageTypes)
+		{
+			const float ScaledDamage = Pair.Value.GetValueAtLevel(GetAbilityLevel());
+			UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, Pair.Key, ScaledDamage);
+		}
 
 		// Apply the spec handle to the damage effect on AuraProjectile
 		Projectile->DamageEffectSpecHandle = SpecHandle;
