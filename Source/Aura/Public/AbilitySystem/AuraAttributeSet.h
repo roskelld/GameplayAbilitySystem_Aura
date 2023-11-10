@@ -148,13 +148,13 @@ public:
 	FGameplayAttributeData CriticalHitChance;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitChance);
 
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CritialHitDamage, Category = "Secondary Attributes")
-	FGameplayAttributeData CritialHitDamage;
-	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CritialHitDamage);
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitDamage, Category = "Secondary Attributes")
+	FGameplayAttributeData CriticalHitDamage;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitDamage);
 
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CritialHitResistance, Category = "Secondary Attributes")
-	FGameplayAttributeData CritialHitResistance;
-	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CritialHitResistance);
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitResistance, Category = "Secondary Attributes")
+	FGameplayAttributeData CriticalHitResistance;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, CriticalHitResistance);
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HealthRegeneration, Category = "Secondary Attributes")
 	FGameplayAttributeData HealthRegeneration;
@@ -223,10 +223,10 @@ public:
 	void OnRep_CriticalHitChance(const FGameplayAttributeData& OldCriticalHitChance) const;
 
 	UFUNCTION()
-	void OnRep_CritialHitDamage(const FGameplayAttributeData& OldCritialHitDamage) const;
+	void OnRep_CriticalHitDamage(const FGameplayAttributeData& OldCriticalHitDamage) const;
 
 	UFUNCTION()
-	void OnRep_CritialHitResistance(const FGameplayAttributeData& OldCritialHitResistance) const;
+	void OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const;
 
 	UFUNCTION()
 	void OnRep_HealthRegeneration(const FGameplayAttributeData& OldHealthRegeneration) const;

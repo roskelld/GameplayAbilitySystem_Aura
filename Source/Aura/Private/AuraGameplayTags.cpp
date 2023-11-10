@@ -19,8 +19,8 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_Armor, "Attributes.Secon
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ArmorPenetration, "Attributes.Secondary.ArmorPenetration", "Ignores Percentage of enemy Armor, increase Critical Hit Chance");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_BlockChance, "Attributes.Secondary.BlockChance", "Chance to cut incoming damage in half");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CriticalHitChance, "Attributes.Secondary.CriticalHitChance", "Chance to double damage, and critical hit bonus");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CritialHitDamage, "Attributes.Secondary.CritialHitDamage", "Bonus damage added when a critical hit is scored");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CritialHitResistance, "Attributes.Secondary.CritialHitResistance", "Reduces Critical Hit Chance of attacking enemies");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CriticalHitDamage, "Attributes.Secondary.CriticalHitDamage", "Bonus damage added when a critical hit is scored");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_CriticalHitResistance, "Attributes.Secondary.CriticalHitResistance", "Reduces Critical Hit Chance of attacking enemies");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_HealthRegeneration, "Attributes.Secondary.HealthRegeneration", "Amount of Health regenerated every second");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ManaRegeneration, "Attributes.Secondary.ManaRegeneration", "Amount of Mana regenerated every second");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxHealth, "Attributes.Secondary.MaxHealth", "Maximum amount of Health obtainable");
@@ -50,8 +50,8 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Attributes_Secondary_ArmorPenetration = TAG_Attributes_Secondary_ArmorPenetration;
 	GameplayTags.Attributes_Secondary_BlockChance = TAG_Attributes_Secondary_BlockChance;
 	GameplayTags.Attributes_Secondary_CriticalHitChance = TAG_Attributes_Secondary_CriticalHitChance;
-	GameplayTags.Attributes_Secondary_CritialHitDamage = TAG_Attributes_Secondary_CritialHitDamage;
-	GameplayTags.Attributes_Secondary_CritialHitResistance = TAG_Attributes_Secondary_CritialHitResistance;
+	GameplayTags.Attributes_Secondary_CriticalHitDamage = TAG_Attributes_Secondary_CriticalHitDamage;
+	GameplayTags.Attributes_Secondary_CriticalHitResistance = TAG_Attributes_Secondary_CriticalHitResistance;
 	GameplayTags.Attributes_Secondary_HealthRegeneration = TAG_Attributes_Secondary_HealthRegeneration;
 	GameplayTags.Attributes_Secondary_ManaRegeneration = TAG_Attributes_Secondary_ManaRegeneration;
 	GameplayTags.Attributes_Secondary_MaxHealth = TAG_Attributes_Secondary_MaxHealth;
