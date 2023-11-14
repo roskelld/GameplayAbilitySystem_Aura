@@ -30,7 +30,8 @@ void AAuraPlayerController::PlayerTick(float DeltaTime)
 void AAuraPlayerController::ShowDamageNumber_Implementation(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit)
 {
 	// IsValid is used as it checks for more than nullptr, that might invalidate a character
-	if (IsValid(TargetCharacter) && DamageTextComponentClass)
+	// Using IsLocalController will prevent the server from running this and showing it on host machine.
+	if (IsValid(TargetCharacter) && DamageTextComponentClass && IsLocalController())
 	{
 		UDamageTextComponent* DamageText = NewObject<UDamageTextComponent>(TargetCharacter, DamageTextComponentClass);
 		DamageText->RegisterComponent();
