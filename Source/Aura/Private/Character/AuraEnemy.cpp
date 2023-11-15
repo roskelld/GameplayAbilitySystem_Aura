@@ -59,7 +59,7 @@ void AAuraEnemy::BeginPlay()
 	// Only done on the server and then propagated down to connected clients
 	if (HasAuthority())
 	{
-		UAuraAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+		UAuraAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent, CharacterClass);
 	}
 	
 

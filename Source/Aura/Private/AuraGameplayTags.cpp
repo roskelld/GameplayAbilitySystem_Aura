@@ -49,6 +49,9 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage_Physical, "Damage.Physical", "Physical
 
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Effects_HitReact, "Effects.HitReact", "Applied to characters are hit reacting");
 
+/* Abilities */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Attack, "Abilities.Attack", "Attack ability");
+
 void FAuraGameplayTags::InitializeNativeGameplayTags()
 {
 	GameplayTags.Attributes_Primary_Strength = TAG_Attributes_Primary_Strength;
@@ -107,4 +110,9 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	 *	Effects
 	 */
 	GameplayTags.Effects_HitReact = TAG_Effects_HitReact;
+
+	/*
+	 *	Abilities
+	 */
+	GameplayTags.Abilities_Attack = TAG_Abilities_Attack;
 }

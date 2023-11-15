@@ -7,6 +7,7 @@
 #include "CharacterClassInfo.generated.h"
 
 class UGameplayEffect;
+class UGameplayAbility;
 
 UENUM(BlueprintType)
 enum class ECharacterClass : uint8
@@ -16,6 +17,7 @@ enum class ECharacterClass : uint8
 	Ranger
 };
 
+// Holds defaults for each class type to differentiate their base
 USTRUCT(BlueprintType)
 struct FCharacterClassDefaultInfo
 {
@@ -23,6 +25,10 @@ struct FCharacterClassDefaultInfo
 
 	UPROPERTY(EditDefaultsOnly, Category = "Class Defaults")
 	TSubclassOf<UGameplayEffect> PrimaryAttributes;
+
+	// List of abilities that all classes share
+	UPROPERTY(EditDefaultsOnly, Category = "Class Defaults")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 };
 
 class UGameplayAbility;
