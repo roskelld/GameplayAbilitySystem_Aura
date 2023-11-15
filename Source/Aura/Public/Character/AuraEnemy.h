@@ -33,6 +33,8 @@ public:
 	//~ Combat Interface.
 	virtual int32 GetPlayerLevel() override;
 	virtual void Die() override;
+	virtual void SetCombatTarget_Implementation(AActor* InCombatTarget) override;
+	virtual AActor* GetCombatTarget_Implementation() const override;
 	//~ end Combat Interface.
 
 	/* Using the delegate from OverlayWidgetController to broadcast health changes to UI health bar widget */
@@ -53,6 +55,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadonly, Category = "Combat")
 	float LifeSpan = 5.f;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Combat")
+	TObjectPtr<AActor> CombatTarget;
 
 protected:
 	virtual void BeginPlay() override;
