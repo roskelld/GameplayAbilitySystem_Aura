@@ -51,8 +51,6 @@ void AAuraEnemy::PossessedBy(AController* NewController)
 void AAuraEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-
-	BaseWalkSpeed = 250.f;
 	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
 	InitAbilityActorInfo();
 
