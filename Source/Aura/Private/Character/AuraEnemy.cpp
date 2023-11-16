@@ -150,6 +150,8 @@ void AAuraEnemy::Die()
 	// Destroy character after lifespan expires
 	SetLifeSpan(LifeSpan);
 
+	if (AuraAIController) AuraAIController->GetBlackboardComponent()->SetValueAsBool(FName("Dead"), true);			// Set in the BP Blackboard
+
 	Super::Die();
 }
 
