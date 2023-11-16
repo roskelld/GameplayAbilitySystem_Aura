@@ -37,8 +37,8 @@ void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 
 	FGameplayEffectContextHandle EffectContextHandle = SourceASC->MakeEffectContext();
 
-	/* Here we create an EffectContextHandle and fill out some of the optional data that it can carry to help show off what is built into the system already 
-	This information isn't needed for the spell, but is good knowledge all the same */
+	// Here we create an EffectContextHandle and fill out some of the optional data that it can carry to help show off what is built into the system already 
+	// This information isn't needed for the spell, but is good knowledge all the same
 
 	EffectContextHandle.SetAbility(this);
 	EffectContextHandle.AddSourceObject(Projectile);
