@@ -25,14 +25,17 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
-	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
-
-	// Called on server to handle character death
-	virtual void Die() override;
-
 	// Handle character death on server and client
 	UFUNCTION(NetMulticast, Reliable)
 	virtual void MulticastHandleDeath();
+
+	/** Combat Interface Start */
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	virtual void Die() override;											// Called on server to handle character death
+	virtual FVector GetCombatSocketLocation_Implementation() override;
+	virtual bool IsDead_Implementation() const override;
+	virtual AActor* GetAvatar_Implementation() override;
+	/** Combat Interface End */
 
 protected:
 	virtual void BeginPlay() override;
@@ -44,7 +47,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocket;
 
-	virtual FVector GetCombatSocketLocation_Implementation() override;
+	bool bDead = false;
 
 	// Populated by AuraEnemy character for AI and via
 	// AuraPlayerState for players
