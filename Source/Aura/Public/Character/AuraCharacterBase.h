@@ -32,7 +32,7 @@ public:
 	/** Combat Interface Start */
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 	virtual void Die() override;											// Called on server to handle character death
-	virtual FVector GetCombatSocketLocation_Implementation() override;
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual bool IsDead_Implementation() const override;
 	virtual AActor* GetAvatar_Implementation() override;
 	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
@@ -50,6 +50,12 @@ protected:
 	/* The point where abilities are fired from */
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocket;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	FName LeftHandSocket;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	FName RightHandSocket;
 
 	bool bDead = false;
 
