@@ -52,6 +52,11 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Effects_HitReact, "Effects.HitReact", "Applie
 /* Abilities */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Attack, "Abilities.Attack", "Attack ability");
 
+/* Montages */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_Weapon, "Montage.Attack.Weapon", "Weapon Attack Montage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_RightHand, "Montage.Attack.RightHand", "Right Hand Attack Montage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_LeftHand, "Montage.Attack.LeftHand", "Left Hand Attack Montage");
+
 void FAuraGameplayTags::InitializeNativeGameplayTags()
 {
 	GameplayTags.Attributes_Primary_Strength = TAG_Attributes_Primary_Strength;
@@ -115,4 +120,12 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	 *	Abilities
 	 */
 	GameplayTags.Abilities_Attack = TAG_Abilities_Attack;
+
+	/*
+	*	Montage
+	*/
+
+	GameplayTags.Montage_Attack_Weapon = TAG_Montage_Attack_Weapon;
+	GameplayTags.Montage_Attack_RightHand = TAG_Montage_Attack_RightHand;
+	GameplayTags.Montage_Attack_LeftHand = TAG_Montage_Attack_LeftHand;
 }
