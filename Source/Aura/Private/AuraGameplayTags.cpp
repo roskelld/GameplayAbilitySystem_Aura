@@ -52,10 +52,16 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Effects_HitReact, "Effects.HitReact", "Applie
 /* Abilities */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Attack, "Abilities.Attack", "Attack ability");
 
+/* Sockets */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_Weapon, "CombatSocket.Weapon", "Weapon Combat Socket");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_RightHand, "CombatSocket.RightHand", "Right Hand Combat Socket");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_LeftHand, "CombatSocket.LeftHand", "Left Hand Combat Socket");
+
 /* Montages */
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_Weapon, "Montage.Attack.Weapon", "Weapon Attack Montage");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_RightHand, "Montage.Attack.RightHand", "Right Hand Attack Montage");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_LeftHand, "Montage.Attack.LeftHand", "Left Hand Attack Montage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_1, "Montage.Attack.1", "Attack Montage 1");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_2, "Montage.Attack.2", "Attack Montage 2");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_3, "Montage.Attack.3", "Attack Montage 3");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_4, "Montage.Attack.4", "Attack Montage 4");
 
 void FAuraGameplayTags::InitializeNativeGameplayTags()
 {
@@ -122,10 +128,19 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Abilities_Attack = TAG_Abilities_Attack;
 
 	/*
+	*	Sockets
+	*/
+
+	GameplayTags.CombatSocket_Weapon = TAG_CombatSocket_Weapon;
+	GameplayTags.CombatSocket_RightHand = TAG_CombatSocket_RightHand;
+	GameplayTags.CombatSocket_LeftHand = TAG_CombatSocket_LeftHand;
+
+	/*
 	*	Montage
 	*/
 
-	GameplayTags.Montage_Attack_Weapon = TAG_Montage_Attack_Weapon;
-	GameplayTags.Montage_Attack_RightHand = TAG_Montage_Attack_RightHand;
-	GameplayTags.Montage_Attack_LeftHand = TAG_Montage_Attack_LeftHand;
+	GameplayTags.Montage_Attack_1 = TAG_Montage_Attack_1;
+	GameplayTags.Montage_Attack_2 = TAG_Montage_Attack_2;
+	GameplayTags.Montage_Attack_3 = TAG_Montage_Attack_3;
+	GameplayTags.Montage_Attack_4 = TAG_Montage_Attack_4;
 }
