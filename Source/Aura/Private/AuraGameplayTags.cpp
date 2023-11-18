@@ -56,6 +56,9 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Attack, "Abilities.Attack", "Attack
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_Weapon, "CombatSocket.Weapon", "Weapon Combat Socket");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_RightHand, "CombatSocket.RightHand", "Right Hand Combat Socket");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_LeftHand, "CombatSocket.LeftHand", "Left Hand Combat Socket");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_Tail, "CombatSocket.Tail", "Tail Combat Socket");
+
+
 
 /* Montages */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_1, "Montage.Attack.1", "Attack Montage 1");
@@ -134,6 +137,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.CombatSocket_Weapon = TAG_CombatSocket_Weapon;
 	GameplayTags.CombatSocket_RightHand = TAG_CombatSocket_RightHand;
 	GameplayTags.CombatSocket_LeftHand = TAG_CombatSocket_LeftHand;
+	GameplayTags.CombatSocket_Tail = TAG_CombatSocket_Tail;
 
 	/*
 	*	Montage

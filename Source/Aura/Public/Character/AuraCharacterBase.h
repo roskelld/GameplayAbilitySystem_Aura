@@ -60,6 +60,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName RightHandSocket;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	FName TailSocket;
+
 	bool bDead = false;
 
 	// Populated by AuraEnemy character for AI and via
