@@ -10,6 +10,7 @@
 
 class UAuraUserWidget;
 class UAbilityInfo;
+class UAuraAbilitySystemComponent;
 struct FOnAttributeChangeData;
 
 /* Database template used to hold data used in the UI widgets */
@@ -71,6 +72,8 @@ protected:
 
 	template<typename T>
 	T* GetDataTableRowByTag(UDataTable* DataTable, const FGameplayTag& Tag);
+
+	void OnInitializeStartupAbilities(UAuraAbilitySystemComponent* AuraASC);
 };
 
 // Template function that can return a table row based on row name matching supplied tag
