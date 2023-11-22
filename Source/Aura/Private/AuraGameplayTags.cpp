@@ -53,6 +53,8 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Effects_HitReact, "Effects.HitReact", "Applie
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Attack, "Abilities.Attack", "Attack ability");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Summon, "Abilities.Summon", "Summon ability");
 
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Fire_FireBolt, "Abilities.Fire.FireBolt", "FireBolt ability");
+
 /* Sockets */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_Weapon, "CombatSocket.Weapon", "Weapon Combat Socket");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_RightHand, "CombatSocket.RightHand", "Right Hand Combat Socket");
@@ -131,6 +133,8 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	 */
 	GameplayTags.Abilities_Attack = TAG_Abilities_Attack;
 	GameplayTags.Abilities_Summon = TAG_Abilities_Summon;
+
+	GameplayTags.Abilities_Fire_FireBolt = TAG_Abilities_Fire_FireBolt;
 
 	/*
 	*	Sockets
