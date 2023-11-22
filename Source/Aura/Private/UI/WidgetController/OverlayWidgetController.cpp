@@ -3,6 +3,7 @@
 
 #include "UI/WidgetController/OverlayWidgetController.h"
 #include "AbilitySystem/AuraAttributeSet.h"
+#include "AbilitySystem/Data/AbilityInfo.h"
 #include <AbilitySystem/AuraAbilitySystemComponent.h>
 
 void UOverlayWidgetController::BroadcastInitialValues()
@@ -37,7 +38,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 		[this](const FOnAttributeChangeData& Data) { OnMaxManaChanged.Broadcast(Data.NewValue); }
 	);
 
-	// Use Lambda function - unamed [] function that binds to the broadcast of EffectAssetTags in 
+	// Use Lambda function - unnamed [] function that binds to the broadcast of EffectAssetTags in 
 	// UAuraAbilitySystemComponent
 
 	if (UAuraAbilitySystemComponent* AuraASC = Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent))
@@ -81,4 +82,19 @@ void UOverlayWidgetController::OnInitializeStartupAbilities(UAuraAbilitySystemCo
 	// TODO: Get Information about all given abilities, look up their Ability Info, and broadcast it to the widgets.
 	if (!AuraASC->bStartupAbilitiesGiven) return;
 
+	// Create a lambda function that can be broadcast to subscritions in order to retrieve info 
+	// This is implimented as a lambda but could be a function pointer as well. Many ways to skin a cat. 
+	FForEachAbility BroadcastDelegate;
+	BroadcastDelegate.BindLambda([this, AuraASC](const FGameplayAbilitySpec& AbilitySpec)
+	{
+		// Get the Ability info
+		FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AuraASC->GetAbilityTagFromSpec(AbilitySpec));
+		// Add the input tag to it (abilities can be set to different input tags so this isn't part of the spec
+		Info.InputTag = AuraASC->GetInputTagFromSpec(AbilitySpec);
+		// Broadcast the info
+		AbilityInfoDelegate.Broadcast(Info);
+	});
+
+	// Go through each ability and assign it the lambda delegate to be able to broadcast
+	AuraASC->ForEachAbility(BroadcastDelegate);
 }

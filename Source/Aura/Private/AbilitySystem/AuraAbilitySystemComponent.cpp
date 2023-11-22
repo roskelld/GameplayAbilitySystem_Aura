@@ -4,6 +4,7 @@
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "AuraGameplayTags.h"
 #include <AbilitySystem/Abilities/AuraGameplayAbility.h>
+#include "AuraLogChannels.h"
 
 void UAuraAbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -59,6 +60,55 @@ void UAuraAbilitySystemComponent::AbilityInputTagReleased(const FGameplayTag& In
 			AbilitySpecInputReleased(AbilitySpec);
 		}
 	}
+}
+
+void UAuraAbilitySystemComponent::ForEachAbility(const FForEachAbility& Delegate)
+{
+	// Locks the ability list to manage any external changes that might be attempted while 
+	// we loop over the list
+	FScopedAbilityListLock ActiveScopeLock(*this);
+
+	// Run over each ability that activatable and execite the 
+	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		if (!Delegate.ExecuteIfBound(AbilitySpec))
+		{
+			UE_LOG(LogAura, Error, TEXT("Failed to execute delegate in %hs"), __FUNCTION__);
+		}
+	}
+
+}
+
+FGameplayTag UAuraAbilitySystemComponent::GetAbilityTagFromSpec(const FGameplayAbilitySpec& AbilitySpec)
+{
+	if (AbilitySpec.Ability)
+	{
+		for (FGameplayTag Tag : AbilitySpec.Ability.Get()->AbilityTags)
+		{
+			// Look for tag that starts with Abilities (Abilities must be a child of Abilitities. 
+			// No other tag in the hierarchy should contain Abilities to ensure compatability
+			// Return that tag as it's the one that declares what ability this is
+			if (Tag.MatchesTag(FGameplayTag::RequestGameplayTag(FName("Abilities"))))
+			{
+				return Tag;
+			}
+		}
+	}
+	UE_LOG(LogAura, Warning, TEXT("Requested GetAbilityTagFromSpec [%s], but spec contained no 'Abilities' tag"), *AbilitySpec.Ability.GetName());
+	return FGameplayTag();
+}
+
+FGameplayTag UAuraAbilitySystemComponent::GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec)
+{
+	for (FGameplayTag Tag : AbilitySpec.DynamicAbilityTags)
+	{
+		if (Tag.MatchesTag(FGameplayTag::RequestGameplayTag(FName("InputTag"))))
+		{
+			return Tag;
+		}
+	}
+	UE_LOG(LogAura, Warning, TEXT("Requested GetInputTagFromSpec [%s], but spec contained no 'InputTag' tag"), *AbilitySpec.Ability.GetName());
+	return FGameplayTag();
 }
 
 void UAuraAbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle)
