@@ -71,6 +71,7 @@ void UAuraAbilitySystemComponent::ForEachAbility(const FForEachAbility& Delegate
 	// Run over each ability that activatable and execite the 
 	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 	{
+		// Execute or return false and show error
 		if (!Delegate.ExecuteIfBound(AbilitySpec))
 		{
 			UE_LOG(LogAura, Error, TEXT("Failed to execute delegate in %hs"), __FUNCTION__);
@@ -94,21 +95,35 @@ FGameplayTag UAuraAbilitySystemComponent::GetAbilityTagFromSpec(const FGameplayA
 			}
 		}
 	}
-	UE_LOG(LogAura, Warning, TEXT("Requested GetAbilityTagFromSpec [%s], but spec contained no 'Abilities' tag"), *AbilitySpec.Ability.GetName());
+	UE_LOG(LogAura, Warning, TEXT("Requested %hs [%s], but spec contained no 'Abilities' tag"), __FUNCTION__, *AbilitySpec.Ability.GetName());
 	return FGameplayTag();
 }
 
 FGameplayTag UAuraAbilitySystemComponent::GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec)
 {
-	for (FGameplayTag Tag : AbilitySpec.DynamicAbilityTags)
+	if (AbilitySpec.Ability)
 	{
-		if (Tag.MatchesTag(FGameplayTag::RequestGameplayTag(FName("InputTag"))))
+		for (FGameplayTag Tag : AbilitySpec.DynamicAbilityTags)
 		{
-			return Tag;
+			if (Tag.MatchesTag(FGameplayTag::RequestGameplayTag(FName("InputTag"))))
+			{
+				return Tag;
+			}
 		}
 	}
-	UE_LOG(LogAura, Warning, TEXT("Requested GetInputTagFromSpec [%s], but spec contained no 'InputTag' tag"), *AbilitySpec.Ability.GetName());
+	UE_LOG(LogAura, Warning, TEXT("Requested %hs [%s], but spec contained no 'InputTag' tag"), __FUNCTION__, *AbilitySpec.Ability.GetName());
 	return FGameplayTag();
+}
+
+void UAuraAbilitySystemComponent::OnRep_ActivateAbilities()
+{
+	Super::OnRep_ActivateAbilities();
+
+	if (!bStartupAbilitiesGiven)
+	{
+		bStartupAbilitiesGiven = true;
+		AbilitiesGivenDelegate.Broadcast(this);
+	}
 }
 
 void UAuraAbilitySystemComponent::ClientEffectApplied_Implementation(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle)

@@ -20,6 +20,7 @@ class AURA_API UAuraAbilitySystemComponent : public UAbilitySystemComponent
 public:
 	void AbilityActorInfoSet();
 
+	// Delegates
 	FEffectAssetTags EffectAssetTags;
 	FAbilitiesGiven AbilitiesGivenDelegate;
 
@@ -38,6 +39,9 @@ public:
 	static FGameplayTag GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 
 protected:
+
+	// Replicate to the clients the activatable abilities so they can run the deletgates and update UI
+	virtual void OnRep_ActivateAbilities() override;
 
 	/* 
 	 Broadcast event messages via Tags

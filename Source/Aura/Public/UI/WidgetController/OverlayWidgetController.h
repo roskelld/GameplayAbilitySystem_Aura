@@ -8,9 +8,7 @@
 #include "Engine/DataTable.h"
 #include "OverlayWidgetController.generated.h"
 
-class UAuraUserWidget;
-class UAbilityInfo;
-class UAuraAbilitySystemComponent;
+struct FAuraAbilityInfo;
 struct FOnAttributeChangeData;
 
 /* Database template used to hold data used in the UI widgets */
@@ -31,6 +29,10 @@ struct FUIWidgetRow : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadOnly) 
 	UTexture2D* Image = nullptr;
 };
+
+class UAuraUserWidget;
+class UAbilityInfo;
+class UAuraAbilitySystemComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature, float, NewValue);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature, FUIWidgetRow, Row);

@@ -73,8 +73,6 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 			}
 		);
 	}
-
-
 }
 
 void UOverlayWidgetController::OnInitializeStartupAbilities(UAuraAbilitySystemComponent* AuraASC)
@@ -88,6 +86,7 @@ void UOverlayWidgetController::OnInitializeStartupAbilities(UAuraAbilitySystemCo
 	BroadcastDelegate.BindLambda([this, AuraASC](const FGameplayAbilitySpec& AbilitySpec)
 	{
 		// Get the Ability info
+		// FAuraAbilityInfo Info = FAuraAbilityInfo(); // AbilityInfo->FindAbilityInfoForTag(AuraASC->GetAbilityTagFromSpec(AbilitySpec));
 		FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AuraASC->GetAbilityTagFromSpec(AbilitySpec));
 		// Add the input tag to it (abilities can be set to different input tags so this isn't part of the spec
 		Info.InputTag = AuraASC->GetInputTagFromSpec(AbilitySpec);
