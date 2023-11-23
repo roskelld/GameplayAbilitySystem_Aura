@@ -55,6 +55,9 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Summon, "Abilities.Summon", "Summon
 
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Fire_FireBolt, "Abilities.Fire.FireBolt", "FireBolt ability");
 
+/* Cooldowns */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Cooldown_Fire_FireBolt, "Cooldown.Fire.FireBolt", "FireBolt ability Cooldown");
+
 /* Sockets */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_Weapon, "CombatSocket.Weapon", "Weapon Combat Socket");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_RightHand, "CombatSocket.RightHand", "Right Hand Combat Socket");
@@ -135,6 +138,12 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Abilities_Summon = TAG_Abilities_Summon;
 
 	GameplayTags.Abilities_Fire_FireBolt = TAG_Abilities_Fire_FireBolt;
+
+	/*
+	*	Cooldowns
+	*/
+
+	GameplayTags.Cooldown_Fire_FireBolt = TAG_Cooldown_Fire_FireBolt;
 
 	/*
 	*	Sockets
