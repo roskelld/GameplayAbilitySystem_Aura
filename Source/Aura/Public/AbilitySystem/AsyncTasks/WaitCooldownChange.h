@@ -14,9 +14,11 @@ struct FGameplayEffectSpec;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCooldownChangeSignature, float, TimeRemaining);
 
 /**
- * 
+ *  Broadcasts a cool down task along with its time remaining
  */
-UCLASS()
+
+// This is how you expose an output tag containing a task reference
+UCLASS(BlueprintType, meta = (ExposedAsyncProxy = "AsyncTask"))
 class AURA_API UWaitCooldownChange : public UBlueprintAsyncActionBase
 {
 	GENERATED_BODY()
