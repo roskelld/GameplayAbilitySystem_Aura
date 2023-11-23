@@ -14,8 +14,6 @@ AAuraPlayerState::AAuraPlayerState()
 
 	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet");
 
-	LevelInformation = CreateDefaultSubobject<ULevelUpInfo>("LevelUpInformation");
-
 	// Default update is slow for player state.
 	// Using it with GAS requires higher update
 	// to keep clients in sync

@@ -26,6 +26,9 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+	
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<ULevelUpInfo> LevelUpInfo;
 
 	FORCEINLINE int32 GetPlayerLevel() const { return Level; }
 	FORCEINLINE int32 GetXP() const { return XP; }
@@ -40,8 +43,6 @@ public:
 	void SetLevel(int32 InLevel);
 	void SetXP(int32 InXP);
 
-
-
 protected:
 
 	UPROPERTY(VisibleAnywhere)
@@ -49,9 +50,6 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
-
-	UPROPERTY()
-	TObjectPtr<ULevelUpInfo> LevelInformation;
 
 private:
 
