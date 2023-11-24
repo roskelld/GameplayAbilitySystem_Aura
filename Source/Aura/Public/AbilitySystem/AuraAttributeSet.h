@@ -283,4 +283,6 @@ private:
 
 	// Spawn floating text widget showing incoming damage amount over target character on the screen of source damage character (player)
 	void ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit, bool bCriticalHit) const;
+
+	void SendXPEvent(const FEffectProperties& Props);
 };
