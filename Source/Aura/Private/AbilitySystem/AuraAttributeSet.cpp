@@ -175,7 +175,6 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
 	{
 		SetHealth(FMath::Clamp(GetHealth(), 0, GetMaxHealth()));
-		UE_LOG(LogAura, Warning, TEXT("Changed Health on %s, Health: %f"), *Props.TargetAvatarActor->GetName(), GetHealth());
 	}
 
 	// Update Mana
@@ -218,6 +217,21 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 			const bool bBlock = UAuraAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
 			const bool bCriticalHit = UAuraAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
 			ShowFloatingText(Props, LocalIncomingDamage, bBlock, bCriticalHit);
+		}
+	}
+
+	// Meta Attribute Calculation for Incoming XP
+	if (Data.EvaluatedData.Attribute == GetIncomingXPAttribute())
+	{
+		// Get current incoming XP
+		const float LocalIncomingXP = GetIncomingXP();
+
+		// Reset incoming XP
+		SetIncomingXP(0.f);
+
+		if (LocalIncomingXP > 0.f)
+		{
+			UE_LOG(LogAura, Warning, TEXT("Incoming XP [%f]"), LocalIncomingXP);
 		}
 	}
 }
