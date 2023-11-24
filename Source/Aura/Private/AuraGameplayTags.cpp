@@ -31,6 +31,10 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Lightning, "Attributes.
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Arcane, "Attributes.Resistance.Arcane", "Resistance to Arcane Damage");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Physical, "Attributes.Resistance.Physical", "Resistance to Physical Damage");
 
+/* Meta Attributes */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Meta_IncomingXP, "Attributes.Meta.IncomingXP", "Incoming XP Reward");
+
+
 /* Controller Input Tags */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_LMB, "InputTag.LMB", "Input Tag for Left Mouse Button");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_RMB, "InputTag.RMB", "Input Tag for Right Mouse Button");
@@ -109,6 +113,11 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Damage_Lightning = TAG_Damage_Lightning;
 	GameplayTags.Damage_Arcane = TAG_Damage_Arcane;
 	GameplayTags.Damage_Physical = TAG_Damage_Physical;
+
+	/*
+	*	Meta
+	*/
+	GameplayTags.Attributes_Meta_IncomingXP = TAG_Attributes_Meta_IncomingXP;
 
 	/*
 	 *	Resistances
