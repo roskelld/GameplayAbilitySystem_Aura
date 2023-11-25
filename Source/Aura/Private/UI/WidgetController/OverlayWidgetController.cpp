@@ -16,22 +16,33 @@ void UOverlayWidgetController::BroadcastInitialValues()
 	OnMaxHealthChanged.Broadcast(AuraAttributeSet->GetMaxHealth());
 	OnManaChanged.Broadcast(AuraAttributeSet->GetMana());
 	OnMaxManaChanged.Broadcast(AuraAttributeSet->GetMaxMana());
-
-	
-
 }
 
 void UOverlayWidgetController::BindCallbacksToDependencies()
 {
+	// Check Player State
 	AAuraPlayerState* AuraPlayerState = CastChecked<AAuraPlayerState>(PlayerState);
 
+	// XP Changed
 	AuraPlayerState->OnXPChangedDelegate.AddUObject(this, &UOverlayWidgetController::OnXPChanged);
 
+	// Level Changed
 	// Bind to the PlayerState Level Changed and broadcast it through the widget
 	AuraPlayerState->OnLevelChangedDelegate.AddLambda(
 		[this](int32 NewLevel) { OnPlayerLevelChangedDelegate.Broadcast(NewLevel);}
 	);
 
+	// Attribute Points Changed
+	AuraPlayerState->OnAttributePointsChangedDelegate.AddLambda(
+		[this](int32 NewAttributePoints) { OnAttributePointsChangedDelegate.Broadcast(NewAttributePoints); }
+	);
+
+	// Spell Points Changed
+	AuraPlayerState->OnSpellPointsChangedDelegate.AddLambda(
+		[this](int32 NewSpellPoints) { OnSpellPointsChangedDelegate.Broadcast(NewSpellPoints); }
+	);
+
+	// Attribute Set
 	const UAuraAttributeSet* AuraAttributeSet = CastChecked<UAuraAttributeSet>(AttributeSet);
 
 	// This binds the value changes to the local function calls as part of GAS

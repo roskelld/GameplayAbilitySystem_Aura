@@ -4,11 +4,11 @@
 #include "UI/WidgetController/AttributeMenuWidgetController.h"
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "AbilitySystem/Data/AttributeInfo.h"
+#include <Player/AuraPlayerState.h>
 
 void UAttributeMenuWidgetController::BindCallbacksToDependencies()
 {
 	UAuraAttributeSet* AS = CastChecked<UAuraAttributeSet>(AttributeSet);
-
 	check(AttributeInfo);
 
 	for (auto& Pair : AS->TagsToAttributes)
@@ -20,6 +20,19 @@ void UAttributeMenuWidgetController::BindCallbacksToDependencies()
 			}
 		);
 	}
+
+	// Check Player State
+	AAuraPlayerState* AuraPlayerState = CastChecked<AAuraPlayerState>(PlayerState);
+
+	// Attribute Points Changed
+	AuraPlayerState->OnAttributePointsChangedDelegate.AddLambda(
+		[this](int32 NewAttributePoints) { AttributePointsChangedDelegate.Broadcast(NewAttributePoints); }
+	);
+
+	// Spell Points Changed
+	AuraPlayerState->OnSpellPointsChangedDelegate.AddLambda(
+		[this](int32 NewSpellPoints) { SpellPointsChangedDelegate.Broadcast(NewSpellPoints); }
+	);
 }
 
 void UAttributeMenuWidgetController::BroadcastInitialValues()

@@ -8,6 +8,8 @@
 class UAbilitySystemComponent;
 class UAttributeSet;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPlayerStatChangedSignature, int32, NewValue);
+
 // Struct to make it easier setting all the required information for setting up a Widget Controller
 USTRUCT(BlueprintType)
 struct FWidgetControllerParams

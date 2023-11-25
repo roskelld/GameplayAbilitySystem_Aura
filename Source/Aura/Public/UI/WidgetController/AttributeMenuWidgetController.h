@@ -24,8 +24,14 @@ public:
 	virtual void BindCallbacksToDependencies() override;
 	
 
-	UPROPERTY(BlueprintAssignable, Category = "GAS|Attributes")
+	UPROPERTY(BlueprintAssignable, Category = "Aura|GAS|Attributes")
 	FAttributeInfoSignature AttributeInfoDelegate;
+
+	UPROPERTY(BlueprintAssignable, Category = "Aura|GAS|Level")
+	FOnPlayerStatChangedSignature AttributePointsChangedDelegate;
+
+	UPROPERTY(BlueprintAssignable, Category = "Aura|GAS|Level")
+	FOnPlayerStatChangedSignature SpellPointsChangedDelegate;
 
 protected:
 
