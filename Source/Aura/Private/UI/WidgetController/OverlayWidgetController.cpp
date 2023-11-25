@@ -27,6 +27,11 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 
 	AuraPlayerState->OnXPChangedDelegate.AddUObject(this, &UOverlayWidgetController::OnXPChanged);
 
+	// Bind to the PlayerState Level Changed and broadcast it through the widget
+	AuraPlayerState->OnLevelChangedDelegate.AddLambda(
+		[this](int32 NewLevel) { OnPlayerLevelChangedDelegate.Broadcast(NewLevel);}
+	);
+
 	const UAuraAttributeSet* AuraAttributeSet = CastChecked<UAuraAttributeSet>(AttributeSet);
 
 	// This binds the value changes to the local function calls as part of GAS
