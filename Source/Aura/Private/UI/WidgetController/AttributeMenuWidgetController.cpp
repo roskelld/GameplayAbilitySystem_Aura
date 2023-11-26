@@ -2,9 +2,11 @@
 
 
 #include "UI/WidgetController/AttributeMenuWidgetController.h"
+#include <AbilitySystem/AuraAbilitySystemComponent.h>
 #include "AbilitySystem/AuraAttributeSet.h"
 #include "AbilitySystem/Data/AttributeInfo.h"
 #include <Player/AuraPlayerState.h>
+
 
 void UAttributeMenuWidgetController::BindCallbacksToDependencies()
 {
@@ -52,6 +54,12 @@ void UAttributeMenuWidgetController::BroadcastInitialValues()
 	// Broadcast Initial Attribute and Spell Points
 	AttributePointsChangedDelegate.Broadcast(AuraPlayerState->GetAttributePoints());
 	SpellPointsChangedDelegate.Broadcast(AuraPlayerState->GetSpellPoints());
+}
+
+void UAttributeMenuWidgetController::UpgradeAttribute(const FGameplayTag& AttributeTag)
+{
+	UAuraAbilitySystemComponent* AuraASC = CastChecked<UAuraAbilitySystemComponent>(AbilitySystemComponent);
+	AuraASC->UpgradeAttribute(AttributeTag);
 }
 
 void UAttributeMenuWidgetController::BroadcastAttributeInfo(const FGameplayTag& AttributeTag, const FGameplayAttribute& Attribute) const
