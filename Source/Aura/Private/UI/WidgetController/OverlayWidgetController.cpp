@@ -10,74 +10,67 @@
 
 void UOverlayWidgetController::BroadcastInitialValues()
 {
-	const UAuraAttributeSet* AuraAttributeSet = CastChecked<UAuraAttributeSet>(AttributeSet);
-
-	OnHealthChanged.Broadcast(AuraAttributeSet->GetHealth());
-	OnMaxHealthChanged.Broadcast(AuraAttributeSet->GetMaxHealth());
-	OnManaChanged.Broadcast(AuraAttributeSet->GetMana());
-	OnMaxManaChanged.Broadcast(AuraAttributeSet->GetMaxMana());
+	OnHealthChanged.Broadcast(GetAuraAS()->GetHealth());
+	OnMaxHealthChanged.Broadcast(GetAuraAS()->GetMaxHealth());
+	OnManaChanged.Broadcast(GetAuraAS()->GetMana());
+	OnMaxManaChanged.Broadcast(GetAuraAS()->GetMaxMana());
 }
 
 void UOverlayWidgetController::BindCallbacksToDependencies()
 {
-	// Check Player State
-	AAuraPlayerState* AuraPlayerState = CastChecked<AAuraPlayerState>(PlayerState);
 
 	// XP Changed
-	AuraPlayerState->OnXPChangedDelegate.AddUObject(this, &UOverlayWidgetController::OnXPChanged);
+	GetAuraPS()->OnXPChangedDelegate.AddUObject(this, &UOverlayWidgetController::OnXPChanged);
 
 	// Level Changed
 	// Bind to the PlayerState Level Changed and broadcast it through the widget
-	AuraPlayerState->OnLevelChangedDelegate.AddLambda(
+	GetAuraPS()->OnLevelChangedDelegate.AddLambda(
 		[this](int32 NewLevel) { OnPlayerLevelChangedDelegate.Broadcast(NewLevel);}
 	);
 
 	// Attribute Points Changed
-	AuraPlayerState->OnAttributePointsChangedDelegate.AddLambda(
+	GetAuraPS()->OnAttributePointsChangedDelegate.AddLambda(
 		[this](int32 NewAttributePoints) { OnAttributePointsChangedDelegate.Broadcast(NewAttributePoints); }
 	);
 
 	// Spell Points Changed
-	AuraPlayerState->OnSpellPointsChangedDelegate.AddLambda(
+	GetAuraPS()->OnSpellPointsChangedDelegate.AddLambda(
 		[this](int32 NewSpellPoints) { OnSpellPointsChangedDelegate.Broadcast(NewSpellPoints); }
 	);
-
-	// Attribute Set
-	const UAuraAttributeSet* AuraAttributeSet = CastChecked<UAuraAttributeSet>(AttributeSet);
 
 	// This binds the value changes to the local function calls as part of GAS
 	// Uses Lambda rather than bind to a local function 
 	// see: https://github.com/roskelld/GameplayAbilitySystem_Aura/commit/9f47b6ee33f568b1d715edb868418fea953fb60a
 	// For older version of set up.
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetHealthAttribute()).AddLambda(
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(GetAuraAS()->GetHealthAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data) { OnHealthChanged.Broadcast(Data.NewValue); }
 	);
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetMaxHealthAttribute()).AddLambda(
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(GetAuraAS()->GetMaxHealthAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data) { OnMaxHealthChanged.Broadcast(Data.NewValue); }
 	);
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetManaAttribute()).AddLambda(
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(GetAuraAS()->GetManaAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data) { OnManaChanged.Broadcast(Data.NewValue); }
 	);
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetMaxManaAttribute()).AddLambda(
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(GetAuraAS()->GetMaxManaAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data) { OnMaxManaChanged.Broadcast(Data.NewValue); }
 	);
 
 	// Use Lambda function - unnamed [] function that binds to the broadcast of EffectAssetTags in 
 	// UAuraAbilitySystemComponent
 
-	if (UAuraAbilitySystemComponent* AuraASC = Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent))
+	if (GetAuraASC())
 	{
-		if (AuraASC->bStartupAbilitiesGiven)
+		if (GetAuraASC()->bStartupAbilitiesGiven)
 		{
-			OnInitializeStartupAbilities(AuraASC);
+			BroadcastAbilityInfo();
 		}
 		else 
 		{
-			AuraASC->AbilitiesGivenDelegate.AddUObject(this, &UOverlayWidgetController::OnInitializeStartupAbilities);
+			GetAuraASC()->AbilitiesGivenDelegate.AddUObject(this, &UOverlayWidgetController::BroadcastAbilityInfo);
 		}
 		
 
-		AuraASC->EffectAssetTags.AddLambda(
+		GetAuraASC()->EffectAssetTags.AddLambda(
 			[this](const FGameplayTagContainer& AssetTags)
 			{
 				for (const FGameplayTag& Tag : AssetTags)
@@ -99,34 +92,9 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	}
 }
 
-void UOverlayWidgetController::OnInitializeStartupAbilities(UAuraAbilitySystemComponent* AuraASC)
+void UOverlayWidgetController::OnXPChanged(int32 NewXP)
 {
-	// Get Information about all given abilities, look up their Ability Info, and broadcast it to the widgets.
-	if (!AuraASC->bStartupAbilitiesGiven) return;
-
-	// Create a lambda function that can be broadcast to subscritions in order to retrieve info 
-	// This is implimented as a lambda but could be a function pointer as well. Many ways to skin a cat. 
-	FForEachAbility BroadcastDelegate;
-	BroadcastDelegate.BindLambda([this, AuraASC](const FGameplayAbilitySpec& AbilitySpec)
-	{
-		// Get the Ability info
-		// FAuraAbilityInfo Info = FAuraAbilityInfo(); // AbilityInfo->FindAbilityInfoForTag(AuraASC->GetAbilityTagFromSpec(AbilitySpec));
-		FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AuraASC->GetAbilityTagFromSpec(AbilitySpec));
-		// Add the input tag to it (abilities can be set to different input tags so this isn't part of the spec
-		Info.InputTag = AuraASC->GetInputTagFromSpec(AbilitySpec);
-		// Broadcast the info
-		AbilityInfoDelegate.Broadcast(Info);
-	});
-
-	// Go through each ability and assign it the lambda delegate to be able to broadcast
-	AuraASC->ForEachAbility(BroadcastDelegate);
-}
-
-void UOverlayWidgetController::OnXPChanged(int32 NewXP) const
-{
-	const AAuraPlayerState* AuraPlayerState = CastChecked<AAuraPlayerState>(PlayerState);
-
-	const ULevelUpInfo* LevelUpInfo = AuraPlayerState->LevelUpInfo;
+	const ULevelUpInfo* LevelUpInfo = GetAuraPS()->LevelUpInfo;
 	checkf(LevelUpInfo, TEXT("Unable to find Level Information, Please fill out PlayerState information"));
 
 	int32 Level = LevelUpInfo->FindLevelForXP(NewXP);
