@@ -38,8 +38,10 @@ void UAuraWidgetController::BroadcastAbilityInfo()
 			// Get the Ability info
 			// FAuraAbilityInfo Info = FAuraAbilityInfo(); // AbilityInfo->FindAbilityInfoForTag(AuraASC->GetAbilityTagFromSpec(AbilitySpec));
 			FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AuraAbilitySystemComponent->GetAbilityTagFromSpec(AbilitySpec));
-			// Add the input tag to it (abilities can be set to different input tags so this isn't part of the spec
+			// Add the input tag to it (abilities can be set to different input tags so this isn't part of the spec)
 			Info.InputTag = AuraAbilitySystemComponent->GetInputTagFromSpec(AbilitySpec);
+			// Add the current status to the info (locked, unlocked, eligible, equipped)
+			Info.StatusTag = AuraAbilitySystemComponent->GetStatusFromSpec(AbilitySpec);
 			// Broadcast the info
 			AbilityInfoDelegate.Broadcast(Info);
 		});
