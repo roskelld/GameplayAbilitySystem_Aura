@@ -42,6 +42,8 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_1, "InputTag.1", "Input Tag for 1 Ke
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_2, "InputTag.2", "Input Tag for 2 Key");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_3, "InputTag.3", "Input Tag for 3 Key");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_4, "InputTag.4", "Input Tag for 4 Key");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_Passive_1, "InputTag.Passive.1", "Input Tag for Passive 1");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_Passive_2, "InputTag.Passive.2", "Input Tag for Passive 2");
 
 /* Set By Caller Tags */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage, "Damage", "Damage tag used by Set by Caller");
@@ -67,8 +69,6 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_Weapon, "CombatSocket.Weapon", "
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_RightHand, "CombatSocket.RightHand", "Right Hand Combat Socket");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_LeftHand, "CombatSocket.LeftHand", "Left Hand Combat Socket");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_Tail, "CombatSocket.Tail", "Tail Combat Socket");
-
-
 
 /* Montages */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_1, "Montage.Attack.1", "Attack Montage 1");
@@ -102,6 +102,8 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.InputTag_2 = TAG_InputTag_2;
 	GameplayTags.InputTag_3 = TAG_InputTag_3;
 	GameplayTags.InputTag_4 = TAG_InputTag_4;
+	GameplayTags.InputTag_Passive_1 = TAG_InputTag_Passive_1;
+	GameplayTags.InputTag_Passive_2 = TAG_InputTag_Passive_2;
 
 	/* Set By Caller Tags */
 	GameplayTags.Damage = TAG_Damage;
