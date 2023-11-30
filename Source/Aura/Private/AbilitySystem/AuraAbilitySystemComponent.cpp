@@ -24,6 +24,7 @@ void UAuraAbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf
 		if (const UAuraGameplayAbility* AuraAbility = Cast<UAuraGameplayAbility>(AbilitySpec.Ability))
 		{
 			AbilitySpec.DynamicAbilityTags.AddTag(AuraAbility->StartupInputTag);
+			AbilitySpec.DynamicAbilityTags.AddTag(FAuraGameplayTags::Get().Abilities_Status_Equipped);
 			GiveAbility(AbilitySpec);
 		}
 	}
@@ -123,6 +124,20 @@ FGameplayTag UAuraAbilitySystemComponent::GetInputTagFromSpec(const FGameplayAbi
 		}
 	}
 	UE_LOG(LogAura, Warning, TEXT("Requested %hs [%s], but spec contained no 'InputTag' tag"), __FUNCTION__, *AbilitySpec.Ability.GetName());
+	return FGameplayTag();
+}
+
+FGameplayTag UAuraAbilitySystemComponent::GetStatusFromSpec(const FGameplayAbilitySpec& AbilitySpec)
+{
+	// Get all the dynamic ability tags that have been applied to the ability spec
+	for (FGameplayTag StatusTag : AbilitySpec.DynamicAbilityTags)
+	{
+		// Look for a "Status" tag (Is it locked, unlocked, eligible or equipped?)
+		if (StatusTag.MatchesTag(FGameplayTag::RequestGameplayTag(FName("Abilities.Status"))))
+		{
+			return StatusTag;
+		}
+	}
 	return FGameplayTag();
 }
 

@@ -55,10 +55,23 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Damage_Physical, "Damage.Physical", "Physical
 
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Effects_HitReact, "Effects.HitReact", "Applied to characters are hit reacting");
 
-/* Abilities */
+/* Ability Style */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Attack, "Abilities.Attack", "Attack ability");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Summon, "Abilities.Summon", "Summon ability");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_HitReact, "Abilities.HitReact", "Applied to characters are hit reacting");
 
+/* Ability Eligibility Status */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Status_Locked, "Abilities.Status.Locked", "Ability is locked");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Status_Eligible, "Abilities.Status.Eligible", "Ability is eligible to be unlocked");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Status_Unlocked, "Abilities.Status.Unlocked", "Ability is unlocked");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Status_Equipped, "Abilities.Status.Equipped", "Ability is equipped");
+
+/* Ability Type */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Type_Offensive, "Abilities.Type.Offensive", "Offensive ability");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Type_Passive, "Abilities.Type.Passive", "Passive ability");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Type_None, "Abilities.Type.None", "Ability has no set type");
+
+/* Ability */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Fire_FireBolt, "Abilities.Fire.FireBolt", "FireBolt ability");
 
 /* Cooldowns */
@@ -143,11 +156,30 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Effects_HitReact = TAG_Effects_HitReact;
 
 	/*
-	 *	Abilities
+	 *	Ability Style
 	 */
 	GameplayTags.Abilities_Attack = TAG_Abilities_Attack;
 	GameplayTags.Abilities_Summon = TAG_Abilities_Summon;
+	GameplayTags.Abilities_HitReact = TAG_Abilities_HitReact;
 
+	/* 
+	*	Ability Eligibility Status 
+	*/
+	GameplayTags.Abilities_Status_Locked = TAG_Abilities_Status_Locked;
+	GameplayTags.Abilities_Status_Eligible = TAG_Abilities_Status_Eligible;
+	GameplayTags.Abilities_Status_Unlocked = TAG_Abilities_Status_Unlocked;
+	GameplayTags.Abilities_Status_Equipped = TAG_Abilities_Status_Equipped;
+
+	/*
+	*	Ability Type
+	*/
+	GameplayTags.Abilities_Type_Offensive = TAG_Abilities_Type_Offensive;
+	GameplayTags.Abilities_Type_Passive = TAG_Abilities_Type_Passive;
+	GameplayTags.Abilities_Type_None = TAG_Abilities_Type_None;
+
+	/*
+	*	Ability
+	*/
 	GameplayTags.Abilities_Fire_FireBolt = TAG_Abilities_Fire_FireBolt;
 
 	/*

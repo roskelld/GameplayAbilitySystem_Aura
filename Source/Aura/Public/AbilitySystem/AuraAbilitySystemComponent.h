@@ -39,6 +39,10 @@ public:
 	static FGameplayTag GetAbilityTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 	static FGameplayTag GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 
+	// Get the current status of an ability from its ability spec
+	static FGameplayTag GetStatusFromSpec(const FGameplayAbilitySpec& AbilitySpec);
+
+
 	// This routes through to GA_ListenForEvents that takes in AttributeTags and runs GE_EventBasedEffect
 	// The modifiers are AttributeBased linked to the AttributeTag and updates attributes on SetByCaller
 	// Works for Attributes and XP 
