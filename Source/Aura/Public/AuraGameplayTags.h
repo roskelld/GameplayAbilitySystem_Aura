@@ -102,9 +102,11 @@ public:
 
 	// Abilites
 	FGameplayTag Abilities_Fire_FireBolt;
+	FGameplayTag Abilities_Lightning_Electrocute;
 
 	// Cooldowns
 	FGameplayTag Cooldown_Fire_FireBolt;
+	FGameplayTag Cooldown_Lightning_Electrocute;
 
 	// Socket
 	FGameplayTag CombatSocket_Weapon;

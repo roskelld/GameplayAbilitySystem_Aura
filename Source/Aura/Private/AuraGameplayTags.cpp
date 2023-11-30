@@ -73,9 +73,11 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Type_None, "Abilities.Type.None", "
 
 /* Ability */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Fire_FireBolt, "Abilities.Fire.FireBolt", "FireBolt ability");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Lightning_Electrocute, "Abilities.Lightning.Electrocute", "Electrocute ability");
 
 /* Cooldowns */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Cooldown_Fire_FireBolt, "Cooldown.Fire.FireBolt", "FireBolt ability Cooldown");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Cooldown_Lightning_Electrocute, "Cooldown.Lightning.Electrocute", "Electrocute ability Cooldown");
 
 /* Sockets */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_CombatSocket_Weapon, "CombatSocket.Weapon", "Weapon Combat Socket");
@@ -181,12 +183,14 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	*	Ability
 	*/
 	GameplayTags.Abilities_Fire_FireBolt = TAG_Abilities_Fire_FireBolt;
+	GameplayTags.Abilities_Lightning_Electrocute = TAG_Abilities_Lightning_Electrocute;
 
 	/*
 	*	Cooldowns
 	*/
 
 	GameplayTags.Cooldown_Fire_FireBolt = TAG_Cooldown_Fire_FireBolt;
+	GameplayTags.Cooldown_Lightning_Electrocute = TAG_Cooldown_Lightning_Electrocute;
 
 	/*
 	*	Sockets
