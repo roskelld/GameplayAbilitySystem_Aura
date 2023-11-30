@@ -7,6 +7,8 @@
 #include "AuraLogChannels.h"
 #include <Interaction/PlayerInterface.h>
 #include <AbilitySystemBlueprintLibrary.h>
+#include <AbilitySystem/AuraAbilitySystemLibrary.h>
+#include <AbilitySystem/Data/AbilityInfo.h>
 
 void UAuraAbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -141,6 +143,23 @@ FGameplayTag UAuraAbilitySystemComponent::GetStatusFromSpec(const FGameplayAbili
 	return FGameplayTag();
 }
 
+FGameplayAbilitySpec* UAuraAbilitySystemComponent::GetSpecFromAbilityTag(const FGameplayTag& AbilityTag)
+{
+	// Lock the ability list while looping to ensure no new abilities get added during the function call
+	FScopedAbilityListLock ActiveScopeLock(*this);
+
+	// Loop through player's current abilities
+	for (FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		// Return matching spec
+		for (FGameplayTag Tag : AbilitySpec.Ability.Get()->AbilityTags)
+		{
+			if (Tag.MatchesTag(AbilityTag)) return &AbilitySpec;
+		}
+	}
+	return nullptr;
+}
+
 void UAuraAbilitySystemComponent::UpgradeAttribute(const FGameplayTag& AttributeTag)
 {
 	if (GetAvatarActor()->Implements<UPlayerInterface>())
@@ -163,6 +182,27 @@ void UAuraAbilitySystemComponent::ServerUpgradeAttribute_Implementation(const FG
 	if (GetAvatarActor()->Implements<UPlayerInterface>())
 	{
 		IPlayerInterface::Execute_AddToAttributePoints(GetAvatarActor(), -1);
+	}
+}
+
+void UAuraAbilitySystemComponent::UpdateAbilityStatuses(int32 Level)
+{
+	UAbilityInfo* AbilityInfo = UAuraAbilitySystemLibrary::GetAbililityInfo(GetAvatarActor());
+
+	for (const FAuraAbilityInfo& Info : AbilityInfo->AbilityInformation)
+	{
+		if (!Info.AbilityTag.IsValid()) continue;
+		// If character is too low level for ability, skip to next one
+		if (Level < Info.LevelRequirement) continue;
+		// If character doesn't have ability then assign it
+		if (GetSpecFromAbilityTag(Info.AbilityTag) == nullptr)
+		{
+			FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(Info.Ability, 1);
+			AbilitySpec.DynamicAbilityTags.AddTag(FAuraGameplayTags::Get().Abilities_Status_Eligible);
+			GiveAbility(AbilitySpec);
+			// Force replication
+			MarkAbilitySpecDirty(AbilitySpec);
+		}
 	}
 }
 

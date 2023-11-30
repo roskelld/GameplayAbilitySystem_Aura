@@ -42,6 +42,7 @@ public:
 	// Get the current status of an ability from its ability spec
 	static FGameplayTag GetStatusFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 
+	FGameplayAbilitySpec* GetSpecFromAbilityTag(const FGameplayTag& AbilityTag);
 
 	// This routes through to GA_ListenForEvents that takes in AttributeTags and runs GE_EventBasedEffect
 	// The modifiers are AttributeBased linked to the AttributeTag and updates attributes on SetByCaller
@@ -52,6 +53,8 @@ public:
 	UFUNCTION(Server, Reliable)
 	void ServerUpgradeAttribute(const FGameplayTag& AttributeTag);
 
+	// Update ability based on character level
+	void UpdateAbilityStatuses(int32 Level);
 protected:
 
 	// Replicate to the clients the activatable abilities so they can run the deletgates and update UI
