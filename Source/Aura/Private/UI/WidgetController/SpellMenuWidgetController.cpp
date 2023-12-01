@@ -19,6 +19,15 @@ void USpellMenuWidgetController::BindCallbacksToDependencies()
 {
 	GetAuraASC()->AbilityStatusChanged.AddLambda([this](const FGameplayTag& AbilityTag, const FGameplayTag& StatusTag) 
 		{
+			if (SelectedAbility.Ability.MatchesTagExact(AbilityTag))
+			{
+				SelectedAbility.Status = StatusTag;
+				bool bEnableSpendPoints = false;
+				bool bEnableEquip = false;
+				ShouldEnableButtons(StatusTag, CurrentSpellPoints, bEnableSpendPoints, bEnableEquip);
+				SpellGlobeSelectedDelgate.Broadcast(bEnableSpendPoints, bEnableEquip);
+			}
+
 			if (AbilityInfo)
 			{
 				FAuraAbilityInfo Info = AbilityInfo->FindAbilityInfoForTag(AbilityTag);
@@ -29,7 +38,15 @@ void USpellMenuWidgetController::BindCallbacksToDependencies()
 
 	// Spell Points Changed
 	GetAuraPS()->OnSpellPointsChangedDelegate.AddLambda(
-		[this](int32 NewSpellPoints) { SpellPointsChangedDelegate.Broadcast(NewSpellPoints); }
+		[this](int32 NewSpellPoints) 
+		{ 
+			SpellPointsChangedDelegate.Broadcast(NewSpellPoints); 
+			CurrentSpellPoints = NewSpellPoints;
+			bool bEnableSpendPoints = false;
+			bool bEnableEquip = false;
+			ShouldEnableButtons(SelectedAbility.Status, CurrentSpellPoints, bEnableSpendPoints, bEnableEquip);
+			SpellGlobeSelectedDelgate.Broadcast(bEnableSpendPoints, bEnableEquip);
+		}
 	);
 }
 
@@ -38,7 +55,7 @@ void USpellMenuWidgetController::SpellGlobeSelected(const FGameplayTag& AbilityT
 	const FAuraGameplayTags GameplayTags = FAuraGameplayTags::Get();
 	const int32 SpellPoints = GetAuraPS()->GetSpellPoints();
 	FGameplayTag AbilityStatus;
-	FGameplayAbilitySpec* AbilitySpec = GetAuraASC()->GetSpecFromAbilityTag(AbilityTag);
+	const FGameplayAbilitySpec* AbilitySpec = GetAuraASC()->GetSpecFromAbilityTag(AbilityTag);
 
 	const bool bTagValid = AbilityTag.IsValid();
 	const bool bTagNone = AbilityTag.MatchesTag(GameplayTags.Abilities_None);
@@ -52,6 +69,9 @@ void USpellMenuWidgetController::SpellGlobeSelected(const FGameplayTag& AbilityT
 	{
 		AbilityStatus = GetAuraASC()->GetStatusFromSpec(*AbilitySpec);
 	}
+
+	SelectedAbility.Ability = AbilityTag;
+	SelectedAbility.Status = AbilityStatus;
 
 	bool bEnableSpendPoints = false;
 	bool bEnableEquip = false;
