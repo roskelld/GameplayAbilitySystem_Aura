@@ -18,4 +18,7 @@ public:
 	virtual void BroadcastInitialValues() override;
 
 	virtual void BindCallbacksToDependencies() override;
+
+	UPROPERTY(BlueprintAssignable, Category = "Aura|GAS|Level")
+	FOnPlayerStatChangedSignature SpellPointsChangedDelegate;
 };
