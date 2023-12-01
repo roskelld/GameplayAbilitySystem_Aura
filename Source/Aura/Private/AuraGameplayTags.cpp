@@ -59,6 +59,7 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Effects_HitReact, "Effects.HitReact", "Applie
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Attack, "Abilities.Attack", "Attack ability");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Summon, "Abilities.Summon", "Summon ability");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_HitReact, "Abilities.HitReact", "Applied to characters are hit reacting");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_None, "Abilities.None", "No Ability - nullptr for Abilities");
 
 /* Ability Eligibility Status */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Status_Locked, "Abilities.Status.Locked", "Ability is locked");
@@ -163,6 +164,7 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Abilities_Attack = TAG_Abilities_Attack;
 	GameplayTags.Abilities_Summon = TAG_Abilities_Summon;
 	GameplayTags.Abilities_HitReact = TAG_Abilities_HitReact;
+	GameplayTags.Abilities_None = TAG_Abilities_None;
 
 	/* 
 	*	Ability Eligibility Status 
