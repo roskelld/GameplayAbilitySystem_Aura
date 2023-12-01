@@ -38,6 +38,9 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Aura|GAS|Messages")
 	FSpellGlobeSelectedSignature SpellGlobeSelectedDelgate;
 
+	UFUNCTION(BlueprintCallable)
+	void SpendPointButtonPressed();
+
 private:
 
 	static void ShouldEnableButtons(const FGameplayTag& AbilityStatus, int32 SpellPoints, bool& bShouldEnableSpellPointsButton, bool& bShouldEnableEquipButton);
