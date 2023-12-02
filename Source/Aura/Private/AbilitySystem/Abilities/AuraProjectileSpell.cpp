@@ -34,32 +34,9 @@ void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 	// Prepare projectile actor ready for spawn
 	AAuraProjectile* Projectile = GetWorld()->SpawnActorDeferred<AAuraProjectile>(ProjectileClass, SpawnTransform, GetOwningActorFromActorInfo(), Cast<APawn>(GetOwningActorFromActorInfo()), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 
-	// Get an ASC to generate data
-	const UAbilitySystemComponent* SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
 
-	FGameplayEffectContextHandle EffectContextHandle = SourceASC->MakeEffectContext();
+	Projectile->DamageEffectParams = MakeDamageEffectParamsFromClassDefault();
 
-	// Here we create an EffectContextHandle and fill out some of the optional data that it can carry to help show off what is built into the system already 
-	// This information isn't needed for the spell, but is good knowledge all the same
-
-	EffectContextHandle.SetAbility(this);
-	EffectContextHandle.AddSourceObject(Projectile);
-	TArray<TWeakObjectPtr<AActor>> Actors;
-	Actors.Add(Projectile);
-	EffectContextHandle.AddActors(Actors);
-	FHitResult HitResult;
-	HitResult.Location = ProjectileTargetLocation;
-	EffectContextHandle.AddHitResult(HitResult);
-
-	// Use ASC to create a spec handle that will be carried by the projectile
-	const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), EffectContextHandle);
-
-	// Set Damage Amount
-	const float ScaledDamage = Damage.GetValueAtLevel(GetAbilityLevel());
-	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, DamageType, ScaledDamage);
-
-	// Apply the spec handle to the damage effect on AuraProjectile
-	Projectile->DamageEffectSpecHandle = SpecHandle;
 
 	Projectile->FinishSpawning(SpawnTransform);
 }
