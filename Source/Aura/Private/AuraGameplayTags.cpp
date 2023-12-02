@@ -26,14 +26,21 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_ManaRegeneration, "Attri
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxHealth, "Attributes.Secondary.MaxHealth", "Maximum amount of Health obtainable");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Secondary_MaxMana, "Attributes.Secondary.MaxMana", "Maximum amount of Mana obtainable");
 
+/* Resistances */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Fire, "Attributes.Resistance.Fire", "Resistance to Fire Damage");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Lightning, "Attributes.Resistance.Lightning", "Resistance to Lightning Damage");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Arcane, "Attributes.Resistance.Arcane", "Resistance to Arcane Damage");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Physical, "Attributes.Resistance.Physical", "Resistance to Physical Damage");
 
+/* Debuffs */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Burn, "Attributes.Debuff.Burn", "Debuff to Fire damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Stun, "Attributes.Debuff.Stun", "Debuff to Lightning damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Arcane, "Attributes.Debuff.Arcane", "Debuff to Arcane damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Physical, "Attributes.Debuff.Physical", "Debuff to Physical damage");
+
+
 /* Meta Attributes */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Meta_IncomingXP, "Attributes.Meta.IncomingXP", "Incoming XP Reward");
-
 
 /* Controller Input Tags */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_InputTag_LMB, "InputTag.LMB", "Input Tag for Left Mouse Button");
@@ -152,6 +159,22 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Lightning, GameplayTags.Attributes_Resistance_Lightning);
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Arcane, GameplayTags.Attributes_Resistance_Arcane);
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_Physical, GameplayTags.Attributes_Resistance_Physical);
+
+	/*
+	 *	Debuffs
+	 */
+	GameplayTags.Attributes_Debuff_Burn = TAG_Attributes_Debuff_Burn;
+	GameplayTags.Attributes_Debuff_Stun = TAG_Attributes_Debuff_Stun;
+	GameplayTags.Attributes_Debuff_Arcane = TAG_Attributes_Debuff_Arcane;
+	GameplayTags.Attributes_Debuff_Physical = TAG_Attributes_Debuff_Physical;
+
+	/*
+	 *	Map of Damage Types to Debuffs
+	 */
+	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Fire, GameplayTags.Attributes_Debuff_Burn);
+	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Lightning, GameplayTags.Attributes_Debuff_Stun);
+	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Arcane, GameplayTags.Attributes_Debuff_Arcane);
+	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Physical, GameplayTags.Attributes_Debuff_Physical);
 
 	/*
 	 *	Effects
