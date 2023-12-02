@@ -38,6 +38,10 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Stun, "Attributes.Debuff.St
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Arcane, "Attributes.Debuff.Arcane", "Debuff to Arcane damage");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Physical, "Attributes.Debuff.Physical", "Debuff to Physical damage");
 
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Chance, "Debuff.Chance", "Chance to Debuff");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Damage, "Debuff.Damage", "Debuff damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Duration, "Debuff.Duration", "Length of time for Debuff");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Frequency, "Debuff.Frequency", "How often can Debuff happen");
 
 /* Meta Attributes */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Meta_IncomingXP, "Attributes.Meta.IncomingXP", "Incoming XP Reward");
@@ -167,6 +171,11 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Attributes_Debuff_Stun = TAG_Attributes_Debuff_Stun;
 	GameplayTags.Attributes_Debuff_Arcane = TAG_Attributes_Debuff_Arcane;
 	GameplayTags.Attributes_Debuff_Physical = TAG_Attributes_Debuff_Physical;
+
+	GameplayTags.Debuff_Chance = TAG_Debuff_Chance;
+	GameplayTags.Debuff_Damage = TAG_Debuff_Damage;
+	GameplayTags.Debuff_Duration = TAG_Debuff_Duration;
+	GameplayTags.Debuff_Frequency = TAG_Debuff_Frequency;
 
 	/*
 	 *	Map of Damage Types to Debuffs

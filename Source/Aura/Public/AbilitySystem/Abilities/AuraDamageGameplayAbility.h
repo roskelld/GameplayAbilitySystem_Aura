@@ -27,4 +27,24 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
 	FScalableFloat Damage;
+
+
+	/*
+	* Debuffs are presented here as floats but could
+	* be added as FScalableFloat along with a curve
+	* table to change how they work per level.
+	*/
+	
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float DebuffChance = 20.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float DebuffDamage = 5.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float DebuffFrequency = 1.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float DebuffDuration = 5.f;
 };
