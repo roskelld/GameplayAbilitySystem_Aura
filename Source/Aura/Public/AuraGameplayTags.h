@@ -84,10 +84,10 @@ public:
 	FGameplayTag Attributes_Resistance_Physical;
 
 	// Debuff Types
-	FGameplayTag Attributes_Debuff_Burn;
-	FGameplayTag Attributes_Debuff_Stun;
-	FGameplayTag Attributes_Debuff_Arcane;
-	FGameplayTag Attributes_Debuff_Physical;
+	FGameplayTag Debuff_Burn;
+	FGameplayTag Debuff_Stun;
+	FGameplayTag Debuff_Arcane;
+	FGameplayTag Debuff_Physical;
 
 	FGameplayTag Debuff_Chance;
 	FGameplayTag Debuff_Damage;

@@ -33,10 +33,10 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Arcane, "Attributes.Res
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Resistance_Physical, "Attributes.Resistance.Physical", "Resistance to Physical Damage");
 
 /* Debuffs */
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Burn, "Attributes.Debuff.Burn", "Debuff to Fire damage");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Stun, "Attributes.Debuff.Stun", "Debuff to Lightning damage");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Arcane, "Attributes.Debuff.Arcane", "Debuff to Arcane damage");
-UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Attributes_Debuff_Physical, "Attributes.Debuff.Physical", "Debuff to Physical damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Burn, "Debuff.Burn", "Debuff to Fire damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Stun, "Debuff.Stun", "Debuff to Lightning damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Arcane, "Debuff.Arcane", "Debuff to Arcane damage");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Physical, "Debuff.Physical", "Debuff to Physical damage");
 
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Chance, "Debuff.Chance", "Chance to Debuff");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Debuff_Damage, "Debuff.Damage", "Debuff damage");
@@ -167,10 +167,10 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	/*
 	 *	Debuffs
 	 */
-	GameplayTags.Attributes_Debuff_Burn = TAG_Attributes_Debuff_Burn;
-	GameplayTags.Attributes_Debuff_Stun = TAG_Attributes_Debuff_Stun;
-	GameplayTags.Attributes_Debuff_Arcane = TAG_Attributes_Debuff_Arcane;
-	GameplayTags.Attributes_Debuff_Physical = TAG_Attributes_Debuff_Physical;
+	GameplayTags.Debuff_Burn = TAG_Debuff_Burn;
+	GameplayTags.Debuff_Stun = TAG_Debuff_Stun;
+	GameplayTags.Debuff_Arcane = TAG_Debuff_Arcane;
+	GameplayTags.Debuff_Physical = TAG_Debuff_Physical;
 
 	GameplayTags.Debuff_Chance = TAG_Debuff_Chance;
 	GameplayTags.Debuff_Damage = TAG_Debuff_Damage;
@@ -180,10 +180,10 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	/*
 	 *	Map of Damage Types to Debuffs
 	 */
-	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Fire, GameplayTags.Attributes_Debuff_Burn);
-	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Lightning, GameplayTags.Attributes_Debuff_Stun);
-	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Arcane, GameplayTags.Attributes_Debuff_Arcane);
-	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Physical, GameplayTags.Attributes_Debuff_Physical);
+	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Fire, GameplayTags.Debuff_Burn);
+	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Lightning, GameplayTags.Debuff_Stun);
+	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Arcane, GameplayTags.Debuff_Arcane);
+	GameplayTags.DamageTypesToDebuffs.Add(GameplayTags.Damage_Physical, GameplayTags.Debuff_Physical);
 
 	/*
 	 *	Effects
