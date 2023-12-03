@@ -281,6 +281,11 @@ public:
 	void OnRep_PhysicalResistance(const FGameplayAttributeData& OldPhysicalResistance) const;
 
 private:
+
+	void HandleIncomingDamage(const FEffectProperties& Props);
+	void HandleIncomingXP(const FEffectProperties& Props);
+	void Debuff(const FEffectProperties& Props);
+
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
 
 	// Spawn floating text widget showing incoming damage amount over target character on the screen of source damage character (player)
