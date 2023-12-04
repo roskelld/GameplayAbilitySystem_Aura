@@ -30,11 +30,11 @@ public:
 
 	// Handle character death on server and client
 	UFUNCTION(NetMulticast, Reliable)
-	virtual void MulticastHandleDeath();
+	virtual void MulticastHandleDeath(const FVector& DeathImpulse);
 
 	/** Combat Interface Start */
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
-	virtual void Die() override;											// Called on server to handle character death
+	virtual void Die(const FVector& DeathImpulse) override;											// Called on server to handle character death
 	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual bool IsDead_Implementation() const override;
 	virtual AActor* GetAvatar_Implementation() override;
@@ -46,7 +46,6 @@ public:
 	virtual ECharacterClass GetCharacterClass_Implementation() override;
 	virtual FOnASCRegistered GetOnASCRegisteredDeletgate() override;
 	virtual FOnDeath GetOnDeathDelegate() override;
-
 	/** Combat Interface End */
 
 	FOnASCRegistered OnASCRegistered;
