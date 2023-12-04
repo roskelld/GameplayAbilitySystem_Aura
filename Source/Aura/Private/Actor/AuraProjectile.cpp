@@ -61,6 +61,9 @@ void AAuraProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, 
 		// Get the ASC of the actor we hit
 		if (UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor))
 		{
+			const FVector DeathImpulse = GetActorForwardVector() * DamageEffectParams.DeathImpulseMagnitude;
+			DamageEffectParams.DeathImpulse = DeathImpulse;						// Generate the physics impulse hit on the target
+
 			DamageEffectParams.TargetAbilitySystemComponent = TargetASC;		// Now we've hit a target we know its ASC
 			UAuraAbilitySystemLibrary::ApplyDamageEffect(DamageEffectParams);
 		}
