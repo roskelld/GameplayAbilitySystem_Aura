@@ -103,6 +103,12 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_2, "Montage.Attack.2", "Attack
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_3, "Montage.Attack.3", "Attack Montage 3");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Montage_Attack_4, "Montage.Attack.4", "Attack Montage 4");
 
+/* Player Tags */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Player_Block_InputPressed, "Player.Block.InputPressed", "Block Input Pressed");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Player_Block_InputReleased, "Player.Block.InputReleased", "Block Input Released");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Player_Block_InputHeld, "Player.Block.InputHeld", "Block Input Held");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Player_Block_CursorTrace, "Player.Block.CursorTrace", "Block Cursor Trace");
+
 void FAuraGameplayTags::InitializeNativeGameplayTags()
 {
 	GameplayTags.Attributes_Primary_Strength = TAG_Attributes_Primary_Strength;
@@ -243,4 +249,13 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Montage_Attack_2 = TAG_Montage_Attack_2;
 	GameplayTags.Montage_Attack_3 = TAG_Montage_Attack_3;
 	GameplayTags.Montage_Attack_4 = TAG_Montage_Attack_4;
+
+	/*
+	*	Player Tags
+	*/
+
+	GameplayTags.Player_Block_InputPressed = TAG_Player_Block_InputPressed;
+	GameplayTags.Player_Block_InputHeld = TAG_Player_Block_InputHeld;
+	GameplayTags.Player_Block_InputReleased = TAG_Player_Block_InputReleased;
+	GameplayTags.Player_Block_CursorTrace = TAG_Player_Block_CursorTrace;
 }
