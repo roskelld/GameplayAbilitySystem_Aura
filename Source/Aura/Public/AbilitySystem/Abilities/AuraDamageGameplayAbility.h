@@ -19,6 +19,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CauseDamage(AActor* TargetActor);
 
+	UFUNCTION(BlueprintPure)
 	FDamageEffectParams MakeDamageEffectParamsFromClassDefault(AActor* TargetActor = nullptr) const;
 protected:
 
@@ -31,14 +32,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
 	FScalableFloat Damage;
 
-
 	/*
 	* Debuffs are presented here as floats but could
 	* be added as FScalableFloat along with a curve
 	* table to change how they work per level.
 	*/
 	
-
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
 	float DebuffChance = 20.f;
 
@@ -52,5 +51,11 @@ protected:
 	float DebuffDuration = 5.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Damage")
-	float DeathImpulseMagnitude = 60.f;
+	float DeathImpulseMagnitude = 1000.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float KnockbackChance = 0.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	float KnockbackForceMagnitude = 1000.f;
 };

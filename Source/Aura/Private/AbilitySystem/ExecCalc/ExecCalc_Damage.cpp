@@ -153,7 +153,6 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	const bool bBlocked = FMath::RandRange(1, 100) < TargetBlockChance;
 
 	FGameplayEffectContextHandle EffectContexthandle = Spec.GetContext();
-
 	UAuraAbilitySystemLibrary::SetIsBlockedHit(EffectContexthandle, bBlocked);
 
 	// If Block, half damage
