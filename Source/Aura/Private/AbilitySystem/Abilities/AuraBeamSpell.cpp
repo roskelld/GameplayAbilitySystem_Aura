@@ -2,12 +2,13 @@
 
 
 #include "AbilitySystem/Abilities/AuraBeamSpell.h"
+#include "GameFramework/Character.h"
 
 void UAuraBeamSpell::StoreMouseDataInfo(const FHitResult& HitResult)
 {
 	if (HitResult.bBlockingHit)
 	{
-		MouseLocation = HitResult.ImpactPoint;
+		MouseHitLocation = HitResult.ImpactPoint;
 		MouseHitActor= HitResult.GetActor();
 	} 
 	else
@@ -16,10 +17,11 @@ void UAuraBeamSpell::StoreMouseDataInfo(const FHitResult& HitResult)
 	}
 }
 
-void UAuraBeamSpell::StoreOwnerPlayerController()
+void UAuraBeamSpell::StoreOwnerVariables()
 {
 	if (CurrentActorInfo)
 	{
+		OwnerCharacter = Cast<ACharacter>(CurrentActorInfo->AvatarActor);
 		OwnerPlayerController = CurrentActorInfo->PlayerController.Get();
 	}
 	

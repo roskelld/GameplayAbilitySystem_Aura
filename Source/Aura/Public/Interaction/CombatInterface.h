@@ -95,5 +95,5 @@ public:
 	virtual FOnDeath GetOnDeathDelegate() = 0;
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void SetInShockLoop(bool bInLoopo);
+	void SetInShockLoop(bool bInLoop);
 };
