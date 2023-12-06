@@ -3,7 +3,8 @@
 
 #include "AbilitySystem/Abilities/AuraFireBolt.h"
 #include "Interaction/CombatInterface.h"
-#include <Kismet/KismetSystemLibrary.h>
+#include <AbilitySystem/AuraAbilitySystemLibrary.h>
+#include "Actor/AuraProjectile.h"
 
 FString UAuraFireBolt::GetDescription(int32 Level)
 {
@@ -94,44 +95,19 @@ void UAuraFireBolt::SpawnProjectiles(const FVector& ProjectileTargetLocation, co
 	if (bOverridePitch) Rotation.Pitch = PitchOverride;
 
 	const FVector Forward = Rotation.Vector();
-	const FVector LeftOfSpread = Forward.RotateAngleAxis(-ProjectileSpread / 2.f, FVector::UpVector);
-	const FVector RightOfSpread = Forward.RotateAngleAxis(ProjectileSpread / 2.f, FVector::UpVector);
-	const FVector Start = SocketLocation + FVector(0, 0, 5.f);
-
-	//NumProjectiles - FMath::Min(MaxNumProjectiles, GetAbilityLevel());
-
-	if (NumProjectiles > 1)
+	TArray<FRotator> Rotations = UAuraAbilitySystemLibrary::EvenlySpreadRotators(Forward, FVector::UpVector, ProjectileSpread, NumProjectiles);
+	
+	for (FRotator& Rot : Rotations)
 	{
-		const float DeltaSpread = ProjectileSpread / (NumProjectiles - 1);
-		for (int32 i = 0; i < NumProjectiles; i++)
-		{
-			const FVector Direction = LeftOfSpread.RotateAngleAxis(DeltaSpread * i, FVector::UpVector);
-			UKismetSystemLibrary::DrawDebugArrow(GetAvatarActorFromActorInfo(), Start, Start + Direction * 75.f, 1, FLinearColor::Red, 120, 1);
+		FTransform SpawnTransform;
+		SpawnTransform.SetLocation(SocketLocation);
+		SpawnTransform.SetRotation(Rot.Quaternion());
 
-		}
-	} 
-	else 
-	{ 
-		// Single Projectile
-		UKismetSystemLibrary::DrawDebugArrow(GetAvatarActorFromActorInfo(), Start, Start + Forward * 75.f, 1, FLinearColor::Red, 120, 1);
+		// Prepare projectile actor ready for spawn
+		AAuraProjectile* Projectile = GetWorld()->SpawnActorDeferred<AAuraProjectile>(ProjectileClass, SpawnTransform, GetOwningActorFromActorInfo(), Cast<APawn>(GetOwningActorFromActorInfo()), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
+		Projectile->DamageEffectParams = MakeDamageEffectParamsFromClassDefault();
+
+		Projectile->FinishSpawning(SpawnTransform);
 	}
 
-	UKismetSystemLibrary::DrawDebugArrow(GetAvatarActorFromActorInfo(), SocketLocation, SocketLocation + Forward * 100.f, 1, FLinearColor::White, 120, 1);
-	UKismetSystemLibrary::DrawDebugArrow(GetAvatarActorFromActorInfo(), SocketLocation, SocketLocation + LeftOfSpread * 100.f, 1, FLinearColor::Gray, 120, 1);
-	UKismetSystemLibrary::DrawDebugArrow(GetAvatarActorFromActorInfo(), SocketLocation, SocketLocation + RightOfSpread * 100.f, 1, FLinearColor::Gray, 120, 1);
-
-
-	//FTransform SpawnTransform;
-	//SpawnTransform.SetLocation(SocketLocation);
-
-	//SpawnTransform.SetRotation(Rotation.Quaternion());
-
-	//// Prepare projectile actor ready for spawn
-	//AAuraProjectile* Projectile = GetWorld()->SpawnActorDeferred<AAuraProjectile>(ProjectileClass, SpawnTransform, GetOwningActorFromActorInfo(), Cast<APawn>(GetOwningActorFromActorInfo()), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
-
-
-	//Projectile->DamageEffectParams = MakeDamageEffectParamsFromClassDefault();
-
-
-	//Projectile->FinishSpawning(SpawnTransform);
 }
