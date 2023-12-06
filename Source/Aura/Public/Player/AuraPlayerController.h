@@ -16,6 +16,7 @@ class UAuraInputConfig;
 class UAuraAbilitySystemComponent;
 class USplineComponent;
 class UDamageTextComponent;
+class UNiagaraSystem;
 /**
  * 
  */
@@ -81,6 +82,9 @@ private:
 	/* Spline player character will follow on a click to move action */
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USplineComponent> Spline;
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<UNiagaraSystem> ClickNiagaraSystem;
 
 	void AutoRun();
 
