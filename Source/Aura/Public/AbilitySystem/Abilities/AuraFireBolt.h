@@ -28,4 +28,13 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "FireBolt")
 	int32 MaxNumProjectiles = 5;
+
+	UPROPERTY(EditDefaultsOnly, Category = "FireBolt")
+	float MaxHomingAcceleration = 3200;
+
+	UPROPERTY(EditDefaultsOnly, Category = "FireBolt")
+	float MinHomingAcceleration = 1600.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "FireBolt")
+	bool bLaunchHomingProjectiles = false;
 };

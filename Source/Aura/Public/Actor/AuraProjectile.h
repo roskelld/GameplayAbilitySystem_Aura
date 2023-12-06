@@ -25,6 +25,14 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta=(ExposeOnSpawn = true))
 	FDamageEffectParams DamageEffectParams;
 
+	// This is setup so that homing targets that don't have a given
+	// target (like an actor) have something to target. 
+	// Setting this up with UPROPERTY will allow it to be 
+	// garbage collected automatically
+	// See AuraFireBolt for useage.
+	UPROPERTY()
+	TObjectPtr<USceneComponent> HomingTargetSceneComponent;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Destroyed();
