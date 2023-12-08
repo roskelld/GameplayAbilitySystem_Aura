@@ -74,7 +74,12 @@ void AAuraCharacterBase::MulticastHandleDeath_Implementation(const FVector& Deat
 
 	bDead = true;
 
-	OnDeath.Broadcast(this);
+	// If they were burning, stop
+	BurnDebuffComponent->Deactivate();
+
+	// Let those registed to the delgate know they're dead
+	// Electric Lightning Shock uses this
+	OnDeathDelegate.Broadcast(this);
 }
 
 void AAuraCharacterBase::BeginPlay()
@@ -156,9 +161,9 @@ FOnASCRegistered AAuraCharacterBase::GetOnASCRegisteredDeletgate()
 	return OnASCRegistered;
 }
 
-FOnDeath AAuraCharacterBase::GetOnDeathDelegate()
+FOnDeathSignature& AAuraCharacterBase::GetOnDeathDelegate()
 {
-	return OnDeath;
+	return OnDeathDelegate;
 }
 
 USkeletalMeshComponent* AAuraCharacterBase::GetWeapon_Implementation()
