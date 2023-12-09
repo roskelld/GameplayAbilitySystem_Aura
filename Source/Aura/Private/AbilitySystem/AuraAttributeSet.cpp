@@ -325,7 +325,19 @@ void UAuraAttributeSet::Debuff(const FEffectProperties& Props)
 	Effect->DurationPolicy = EGameplayEffectDurationType::HasDuration;
 	Effect->Period = DebuffFrequency;
 	Effect->DurationMagnitude = FScalableFloat(DebuffDuration);
-	Effect->InheritableOwnedTagsContainer.AddTag(Tags.DamageTypesToDebuffs[DamageType]);
+
+	const FGameplayTag DebuffTag = Tags.DamageTypesToDebuffs[DamageType];
+	Effect->InheritableOwnedTagsContainer.AddTag(DebuffTag);
+
+	// If Player is stunned block all input
+	if (DebuffTag.MatchesTagExact(Tags.Debuff_Stun))
+	{
+		Effect->InheritableOwnedTagsContainer.AddTag(Tags.Player_Block_CursorTrace);
+		Effect->InheritableOwnedTagsContainer.AddTag(Tags.Player_Block_InputHeld);
+		Effect->InheritableOwnedTagsContainer.AddTag(Tags.Player_Block_InputPressed);
+		Effect->InheritableOwnedTagsContainer.AddTag(Tags.Player_Block_InputReleased);
+	}
+
 	Effect->StackingType = EGameplayEffectStackingType::AggregateBySource;
 	Effect->StackLimitCount = 1;
 
