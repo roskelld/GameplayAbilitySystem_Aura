@@ -87,6 +87,11 @@ UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Type_None, "Abilities.Type.None", "
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Fire_FireBolt, "Abilities.Fire.FireBolt", "FireBolt ability");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Lightning_Electrocute, "Abilities.Lightning.Electrocute", "Electrocute ability");
 
+/* Passive Abilities */
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Passive_HaloOfProtection, "Abilities.Passive.HaloOfProtection", "Halo Of Protection ability");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Passive_LifeSiphon, "Abilities.Passive.LifeSiphon", "LifeSiphon ability");
+UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Abilities_Passive_ManaSiphon, "Abilities.Passive.ManaSiphon", "Halo Of Protection ability");
+
 /* Cooldowns */
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Cooldown_Fire_FireBolt, "Cooldown.Fire.FireBolt", "FireBolt ability Cooldown");
 UE_DEFINE_GAMEPLAY_TAG_COMMENT(TAG_Cooldown_Lightning_Electrocute, "Cooldown.Lightning.Electrocute", "Electrocute ability Cooldown");
@@ -226,16 +231,21 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Abilities_Lightning_Electrocute = TAG_Abilities_Lightning_Electrocute;
 
 	/*
+	*	Passive Abilities
+	*/
+	GameplayTags.Abilities_Passive_HaloOfProtection = TAG_Abilities_Passive_HaloOfProtection;
+	GameplayTags.Abilities_Passive_LifeSiphon = TAG_Abilities_Passive_LifeSiphon;
+	GameplayTags.Abilities_Passive_ManaSiphon = TAG_Abilities_Passive_ManaSiphon;
+
+	/*
 	*	Cooldowns
 	*/
-
 	GameplayTags.Cooldown_Fire_FireBolt = TAG_Cooldown_Fire_FireBolt;
 	GameplayTags.Cooldown_Lightning_Electrocute = TAG_Cooldown_Lightning_Electrocute;
 
 	/*
 	*	Sockets
 	*/
-
 	GameplayTags.CombatSocket_Weapon = TAG_CombatSocket_Weapon;
 	GameplayTags.CombatSocket_RightHand = TAG_CombatSocket_RightHand;
 	GameplayTags.CombatSocket_LeftHand = TAG_CombatSocket_LeftHand;
@@ -244,7 +254,6 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	/*
 	*	Montage
 	*/
-
 	GameplayTags.Montage_Attack_1 = TAG_Montage_Attack_1;
 	GameplayTags.Montage_Attack_2 = TAG_Montage_Attack_2;
 	GameplayTags.Montage_Attack_3 = TAG_Montage_Attack_3;
