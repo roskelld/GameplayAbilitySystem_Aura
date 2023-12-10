@@ -60,7 +60,7 @@ public:
 
 	// NOTE: Server based functions must be implementated with the _Implementation naming convention
 	UFUNCTION(Server, Reliable)
-	void ServerUpgradeAttribute(const FGameplayTag& AttributeTag);
+	void Server_UpgradeAttribute(const FGameplayTag& AttributeTag);
 
 	// Update ability based on character level
 	void UpdateAbilityStatuses(int32 Level);
@@ -72,6 +72,7 @@ public:
 	UFUNCTION(Server, Reliable)
 	void Server_EquipAbility(const FGameplayTag& AbilityTag, const FGameplayTag& Slot);
 
+	UFUNCTION(Client, Reliable)
 	void Client_EquipAbility(const FGameplayTag& AbilityTag, const FGameplayTag& Status, const FGameplayTag& Slot, const FGameplayTag& PreviousSlot);
 
 	bool GetDescriptionsByAbilityTag(const FGameplayTag& AbilityTag, FString& OutDescription, FString& OutNextLevelDescription);

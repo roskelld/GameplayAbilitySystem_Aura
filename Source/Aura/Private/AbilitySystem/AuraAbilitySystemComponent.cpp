@@ -205,12 +205,12 @@ void UAuraAbilitySystemComponent::UpgradeAttribute(const FGameplayTag& Attribute
 	{
 		if (IPlayerInterface::Execute_GetAttributePoints(GetAvatarActor()) > 0)
 		{
-			ServerUpgradeAttribute(AttributeTag);
+			Server_UpgradeAttribute(AttributeTag);
 		}
 	}
 }
 
-void UAuraAbilitySystemComponent::ServerUpgradeAttribute_Implementation(const FGameplayTag& AttributeTag)
+void UAuraAbilitySystemComponent::Server_UpgradeAttribute_Implementation(const FGameplayTag& AttributeTag)
 {
 	FGameplayEventData Payload;
 	Payload.EventTag = AttributeTag;
@@ -310,7 +310,7 @@ void UAuraAbilitySystemComponent::Server_EquipAbility_Implementation(const FGame
 	}
 }
 
-void UAuraAbilitySystemComponent::Client_EquipAbility(const FGameplayTag& AbilityTag, const FGameplayTag& Status, const FGameplayTag& Slot, const FGameplayTag& PreviousSlot)
+void UAuraAbilitySystemComponent::Client_EquipAbility_Implementation(const FGameplayTag& AbilityTag, const FGameplayTag& Status, const FGameplayTag& Slot, const FGameplayTag& PreviousSlot)
 {
 	AbilityEquipped.Broadcast(AbilityTag, Status, Slot, PreviousSlot);
 }
