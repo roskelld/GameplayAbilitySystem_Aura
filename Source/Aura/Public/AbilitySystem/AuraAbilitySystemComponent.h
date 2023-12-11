@@ -49,7 +49,20 @@ public:
 	static FGameplayTag GetStatusFromSpec(const FGameplayAbilitySpec& AbilitySpec);
 
 	FGameplayTag GetStatusFromAbilityTag(const FGameplayTag& AbilityTag);
-	FGameplayTag GetInputTagFromAbilityTag(const FGameplayTag& AbilityTag);
+	FGameplayTag GetSlotFromAbilityTag(const FGameplayTag& AbilityTag);
+
+	// Check if an ability slot is empty
+	bool SlotIsEmpty(const FGameplayTag& Slot);
+	// Check if ability has the reference slot
+	static bool AbilityHasSlot(const FGameplayAbilitySpec& Spec, const FGameplayTag& Slot);
+	// Check if the ability has ANY slot
+	static bool AbilityHasAnySlot(const FGameplayAbilitySpec& Spec);
+	// Assign the given slot to the given ability
+	static void AssignSlotToAbility(FGameplayAbilitySpec& Spec, const FGameplayTag& Slot);
+
+	FGameplayAbilitySpec* GetSpecFromSlot(const FGameplayTag& Slot);
+
+	bool IsPassiveAbility(const FGameplayAbilitySpec& AbilitySpec) const;
 
 	FGameplayAbilitySpec* GetSpecFromAbilityTag(const FGameplayTag& AbilityTag);
 
@@ -78,7 +91,7 @@ public:
 	bool GetDescriptionsByAbilityTag(const FGameplayTag& AbilityTag, FString& OutDescription, FString& OutNextLevelDescription);
 
 	// Clears the abilities currently assigned input slot tag
-	void ClearSlot(FGameplayAbilitySpec* Spec);
+	static void ClearSlot(FGameplayAbilitySpec* Spec);
 
 	void ClearAbilitesOfSlot(const FGameplayTag& Slot);
 
