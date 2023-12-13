@@ -108,9 +108,10 @@ void UAuraFireBolt::SpawnProjectiles(const FVector& ProjectileTargetLocation, co
 		// Prepare projectile actor ready for spawn
 		AAuraProjectile* Projectile = GetWorld()->SpawnActorDeferred<AAuraProjectile>(ProjectileClass, SpawnTransform, GetOwningActorFromActorInfo(), Cast<APawn>(GetOwningActorFromActorInfo()), ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 		Projectile->DamageEffectParams = MakeDamageEffectParamsFromClassDefault();
-
+		
 		if (HomingTarget && HomingTarget->Implements<UCombatInterface>())
 		{
+			Projectile->HomingTargetSceneComponent = HomingTarget->GetRootComponent();
 			Projectile->ProjectileMovement->HomingTargetComponent = HomingTarget->GetRootComponent();
 		}
 		else
@@ -123,8 +124,10 @@ void UAuraFireBolt::SpawnProjectiles(const FVector& ProjectileTargetLocation, co
 			Projectile->ProjectileMovement->HomingTargetComponent = Projectile->HomingTargetSceneComponent;
 		}
 
-		Projectile->ProjectileMovement->HomingAccelerationMagnitude = FMath::FRandRange(MinHomingAcceleration, MaxHomingAcceleration);
-		Projectile->ProjectileMovement->bIsHomingProjectile = bLaunchHomingProjectiles;
+		// Set the replicated properties for the clients
+		Projectile->HomingAccelerationMagnitude = FMath::FRandRange(MinHomingAcceleration, MaxHomingAcceleration);
+		Projectile->bHomingProjectile = bLaunchHomingProjectiles;
+		Projectile->HomingTargetLocation = ProjectileTargetLocation;
 
 		Projectile->FinishSpawning(SpawnTransform);
 	}

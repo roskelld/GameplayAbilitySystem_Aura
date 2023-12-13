@@ -32,11 +32,38 @@ AAuraProjectile::AAuraProjectile()
 	ProjectileMovement->ProjectileGravityScale = 0.f;
 }
 
+void AAuraProjectile::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(AAuraProjectile, HomingTargetSceneComponent);
+	DOREPLIFETIME(AAuraProjectile, bHomingProjectile);
+	DOREPLIFETIME(AAuraProjectile, HomingAccelerationMagnitude);
+	DOREPLIFETIME(AAuraProjectile, HomingTargetLocation);
+}
+
 void AAuraProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 	SetLifeSpan(LifeSpan);
-	SetReplicateMovement(true);
+
+	if (bHomingProjectile)
+	{
+		ProjectileMovement->HomingAccelerationMagnitude = HomingAccelerationMagnitude;
+		ProjectileMovement->bIsHomingProjectile = bHomingProjectile;
+
+		if (HomingTargetSceneComponent.IsNull())
+		{
+			HomingTargetSceneComponent = NewObject<USceneComponent>(USceneComponent::StaticClass());
+			HomingTargetSceneComponent->SetWorldLocation(HomingTargetLocation);
+			ProjectileMovement->HomingTargetComponent = HomingTargetSceneComponent;
+		}
+		ProjectileMovement->HomingTargetComponent = HomingTargetSceneComponent;
+	}
+	else
+	{
+		SetReplicateMovement(true);
+	}
+
 	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AAuraProjectile::OnSphereOverlap);
 	ProjectileSoundComponent = UGameplayStatics::SpawnSoundAttached(ProjectileSound, GetRootComponent());
 }

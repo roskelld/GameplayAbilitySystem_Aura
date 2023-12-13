@@ -18,6 +18,7 @@ class AURA_API AAuraProjectile : public AActor
 	
 public:
 	AAuraProjectile();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UProjectileMovementComponent> ProjectileMovement;
@@ -30,8 +31,17 @@ public:
 	// Setting this up with UPROPERTY will allow it to be 
 	// garbage collected automatically
 	// See AuraFireBolt for useage.
-	UPROPERTY()
+	UPROPERTY(Replicated)
 	TObjectPtr<USceneComponent> HomingTargetSceneComponent;
+
+	UPROPERTY(Replicated)
+	FVector HomingTargetLocation;
+
+	UPROPERTY(Replicated)
+	bool bHomingProjectile = false;
+
+	UPROPERTY(Replicated)
+	float HomingAccelerationMagnitude = 1600.f;
 
 protected:
 	virtual void BeginPlay() override;
@@ -62,6 +72,6 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UAudioComponent> ProjectileSoundComponent;
-	
+
 	bool bHit = false;
 };
